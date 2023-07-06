@@ -4,9 +4,9 @@ from .models import Brand, Category, Addproduct
 from .forms import Addproducts
 import secrets
 
-# @app.route('/')
+# @app.route('/home')
 # def home():
-#     return ""
+#     return render_template('layout.html')
 
 @app.route('/admin')
 def admin():

@@ -2,6 +2,58 @@
 
 {% block content %}
 
+
+<div class="landing-page">
+    <header>
+        <div class="container">
+            <a href="#" class="logo">MOCHI <b>MOCHI</b></a>
+            <ul class="links">
+                <li>Home</li>
+                <li>Products</li>
+                <li>Contact Us</li>
+                <li>About Us</li>
+                <a href="{{ url_for('login') }}">Logout</a>
+            </ul>
+        </div>
+    </header>
+</div>
+    
 {% include '_messages.html' %}
+<div class="text-center h1 ">Welcome admin</div>
+
+<div class="area"></div>
+    <nav class="main-menu">
+    <ul>
+        <li>
+            <a href="{{url_for('addbrand')}}">
+            <i class="fa fa-home fa-2x"></i>
+            <span class="nav-text">
+                Add Brand
+            </span>
+            </a>                               
+        </li>
+
+        <li>
+            <a href="{{url_for('addcategory')}}">
+            <i class="fa fa-home fa-2x"></i>
+            <span class="nav-text">
+                Add Category
+            </span>
+            </a>                               
+        </li>
+
+        <li>
+            <a href="{{url_for('addproduct')}}">
+            <i class="fa fa-home fa-2x"></i>
+            <span class="nav-text">
+                Add Products
+            </span>
+            </a>                               
+        </li>
+    </ul>
+              
+    </nav>
+            
+    
 
 {% endblock content %}
