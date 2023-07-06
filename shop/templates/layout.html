@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MOCHI MOCHI</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="https://cdn.logojoy.com/wp-content/uploads/20201123140336/6d268da93ce1e36e7778a263befab8f3-600x600.png"/>
+    <meta name="theme-color" content="#1885ed">
+  </head>
+  <body>
+
+    {% block content %}
+    
+    {% endblock content %}
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+  </body>
+</html>
+
+<script src="{{ url_for('static', filename='js/popper.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>  
