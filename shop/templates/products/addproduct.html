@@ -3,6 +3,21 @@
 {% block content %}
 
 {% include '_messages.html' %}
+
+<div class="landing-page">
+    <header>
+        <div class="container">
+            <a href="#" class="logo">MOCHI <b>MOCHI</b></a>
+            <ul class="links">
+                <li>Home</li>
+                <li>Products</li>
+                <li>Contact Us</li>
+                <li>About Us</li>
+                <a href="{{ url_for('adminpage') }}">Admin Page</a>
+            </ul>
+        </div>
+    </header>
+</div>
 <div class="container">
     <div class="row">
     <div class="col-md-3"></div>
