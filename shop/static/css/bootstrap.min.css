@@ -110,8 +110,16 @@
       gap: 10px;
     }
   }
-  .landing-page header .links li {
+  /* .landing-page header .links li{
     margin-left: 30px;
+    padding: 10px 30px;
+    color: #5d5d5d;
+    cursor: pointer;
+    transition: .3s;
+  } */
+  .landing-page header .links a{
+    margin-left: 30px;
+    padding: 15px 15px;
     color: #5d5d5d;
     cursor: pointer;
     transition: .3s;
@@ -121,16 +129,33 @@
       margin-left: auto;
     }
   }
-  .landing-page header .links a {
+  @media (max-width: 767px) {
+    .landing-page header .links a {
+      margin-left: auto;
+    }
+  }
+  /* .landing-page header .links a {
+    border-radius: 10px;
+    margin-left: 30px;
+    padding: 10px 20px;
+    color: #FFF;;
+  } */
+  /* .landing-page header .links li:not(:last-child):hover {
+    color: #ff00aa;
+  } */
+
+  .landing-page header .links :hover {
+    color: #ff00aa;
+  }
+
+  .logout-link {
     border-radius: 10px;
     margin-left: 30px;
     padding: 10px 20px;
     color: #FFF;
     background-color: #ff00aa;
-  }
-  .landing-page header .links li:not(:last-child):hover {
-    color: #ff00aa;
-  }
+}
+
   .landing-page .content .container {
     display: flex;
     align-items: center;
@@ -312,4 +337,71 @@ height: 100%;
   margin-top: 20px;
   margin-right: 80px;
 }
+/* end side bar */
 
+/* contact us styling */
+
+/* .contact {
+  padding: 130px 0;
+} */
+
+.contact .heading p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #5d5d5d;
+  margin: 20px 0 60px;
+  padding: 0;
+}
+
+.contact .form-control {
+  padding: 25px;
+  font-size: 15px;
+  margin-bottom: 10px;
+  background: #f9f9f9;
+  border: 0;
+  border-radius: 10px;
+}
+
+.contact button.btn {
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 16px;
+  background: #ff00aa;
+  color: #ffffff;
+}
+
+.contact .title h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.contact .title p {
+  font-size: 17px;
+  font-weight: 400;
+  color: #5d5d5d;
+  line-height: 1.6;
+  margin: 0 0 40px;
+}
+
+.contact .content .info {
+  margin-top: 30px;
+}
+.contact .content .info i {
+  /* font-size: 30px; */
+  padding: 0;
+  margin: 0;
+  color: #02434b;
+  margin-right: 20px;
+  text-align: center;
+  width: 20px;
+}
+.contact .content .info h4 {
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+.contact .content .info h4 span {
+  font-size: 16px;
+  font-weight: 300;
+  color: #999999;
+}

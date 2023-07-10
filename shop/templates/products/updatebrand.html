@@ -2,7 +2,6 @@
 
 {% block content %}
 
-{% include '_messages.html' %}
 
 <div class="landing-page">
     <header>
@@ -81,54 +80,31 @@
               
     </nav>
 
-
 <div class="container">
     <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
-        <h5 class="text-center mt-4">Add a product</h5>
-        <hr>
-        {% from "_formhelpers.html" import render_field %}
-        <form action="" method="POST" enctype="multipart/form-data">
-            {{ render_field(form.name, class="form-control", placeholder="Add product name")}}
-            {{ render_field(form.price, class="form-control", placeholder="Add product price")}}
-            {{ render_field(form.discount, class="form-control", placeholder="Add product discount")}}
-            {{ render_field(form.stock, class="form-control", placeholder="Add product stock")}}
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            {% if updatebrand %}
+            <h5 class="text-center mt-4">Update brand</h5>
+            <hr>
+            <form action="" method="POST">
+                <input type="text" name="brand" class="form-control" value="{{updatebrand.name}}">
+                <input type="submit" value="Update brand" class="btn btn-info mt-3">
+            </form>
+            <a href={{url_for('brands')}} class="btn btn-warning" style="margin-top: -65px; margin-left: 150px;">Cancel</a>
 
-            <label for="brand">Add a brand</label>
-            <select name="brand" id="brand" class="form-control" required>
-                <option value="">Select a brand</option>
-                {% for brand in brands %}
-                    <option value="{{brand.id}}"> {{brand.name}} </option>
-                {% endfor %}
-            </select>
+            {% else %}
+            <h5 class="text-center mt-4">Update category</h5>
+            <hr>
+            <form action="" method="POST">
+                <input type="text" name="category" class="form-control" value="{{updatecategory.name}}">
+                <input type="submit" value="Update category" class="btn btn-info mt-3">
+            </form>
+            <a href={{url_for('category')}} class="btn btn-warning" style="margin-top: -65px; margin-left: 180px;">Cancel</a>
 
-
-            <label for="category">Add a category</label>
-            <select name="category" id="category" class="form-control" required>
-                <option value="">Select a category</option>
-                {% for category in categories %}
-                    <option value="{{category.id}}"> {{category.name}} </option>
-                {% endfor %}
-            </select>
-
-
-            {{ render_field(form.colors, class="form-control", placeholder="Add product colors")}}
-            {{ render_field(form.desc, class="form-control", placeholder="Add product description", rows="10")}}
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">{{ render_field(form.image_1, class="form-control")}}</div>
-                    <div class="col-md-4">{{ render_field(form.image_2, class="form-control")}}</div>
-                    <div class="col-md-4">{{ render_field(form.image_3, class="form-control")}}</div>
-
-                </div>
-            </div>
-        <p><input type=submit value="Add Product" class="btn btn-info mt-3"></p>
-        </form>
+            {% endif %}
+        </div>
+        <div class="col-md-3"></div>
     </div>
-    <div class="col-md-3"></div>
 </div>
-</div>
-
-{% endblock content%}
+{% endblock content %}

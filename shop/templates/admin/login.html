@@ -5,14 +5,14 @@
 <div class="landing-page">
     <header>
         <div class="container">
-            <a href="#" class="logo">MOCHI <b>MOCHI</b></a>
+            <a href="{{url_for('home')}}" class="logo">MOCHI <b>MOCHI</b></a>
             <ul class="links">
-                <li>Home</li>
-                <li>Products</li>
-                <li>Contact Us</li>
-                <li>About Us</li>
-                <a href="{{ url_for('register') }}">Sign Up</a>
+                <li><a href="{{url_for('home')}}">Home</a></li>
+                <li><a href="">Products</a></li>
+                <li><a href="{{url_for('contact')}}">Contact Us</a></li>
+                <li><a href="{{url_for('about')}}">About Us</a></li>
             </ul>
+            <a href="{{ url_for('register') }}" class="logout-link">Sign Up</a>
         </div>
     </header>
 </div>

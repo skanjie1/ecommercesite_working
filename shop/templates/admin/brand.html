@@ -18,7 +18,7 @@
     </header>
 </div>
 
-{% include "_messages.html" %}
+{% include '_messages.html' %}
 
 <div class="text-center h1">Welcome admin</div>
 
@@ -80,27 +80,46 @@
               
     </nav>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
+
+<div class="container mt-4">
+    <table class="table table-sm table-condensed table-striped table-hover">
+        <thead>
+            <th>Sr</th>
+            <th>Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
             {% if brands %}
-            <h5 class="text-center mt-4">Add a brand</h5>
+            <div class="text-center h8 mt-4">View brands dashboard</div>
             <hr>
-            <form action="" method="POST">
-                <input type="text" name="brand" class="form-control">
-                <input type="submit" value="Add brand" class="btn btn-info mt-3">
-            </form>
+            {% for brand in brands%}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{brand.name}}</td>
+                <td><a href="{{url_for('updatebrand', id=brand.id)}}", class="btn btn-sm btn-outline-info">Edit</a></td>
+                <td><a href="", class="btn btn-sm btn-outline-danger">Delete</a></td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% endfor %}
             {% else %}
-            <h5 class="text-center mt-4">Add a category</h5>
+            <div class="text-center h8 mt-4">View categories dashboard</div>
             <hr>
-            <form action="" method="POST">
-                <input type="text" name="category" class="form-control">
-                <input type="submit" value="Add category" class="btn btn-info mt-3">
-            </form>
+            {% for category in categories%}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{category.name}}</td>
+                <td><a href="{{url_for('updatecategory', id=category.id)}}", class="btn btn-sm btn-outline-info">Edit</a></td>
+                <td><a href="", class="btn btn-sm btn-outline-danger">Delete</a></td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% endfor %}
             {% endif %}
-        </div>
-        <div class="col-md-3"></div>
-    </div>
-</div>
+        </tbody>
+    </table>
+</div>            
+    
+
 {% endblock content %}

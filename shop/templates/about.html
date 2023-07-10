@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="landing-page">
+    <header>
+        <div class="container">
+            <a href="{{url_for('home')}}" class="logo">MOCHI <b>MOCHI</b></a>
+            <ul class="links">
+                <li><a href="{{url_for('home')}}">Home</a></li>
+                <li><a href="">Products</a></li>
+                <li><a href="{{url_for('contact')}}">Contact Us</a></li>
+                <li><a href="{{url_for('about')}}">About Us</a></li>
+            </ul>
+            <a href="{{ url_for('login') }}" class="logout-link">Login</a>
+        </div>
+    </header>
+</div>
+ 
+
+<div class="container">
+
+    <div class="text-center h1 mt-5">About Us</div>
+    <section class="contact" id="contact">
+        <div class="heading text-center">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ullamcorper diam ut tristique varius. Sed vitae felis sed justo finibus sagittis. Maecenas lacinia orci risus, non dignissim massa laoreet ut. Mauris gravida efficitur diam, nec viverra nulla efficitur ut. Vivamus sit amet facilisis purus. Aliquam erat volutpat. Integer convallis, risus id venenatis finibus, nunc risus dignissim velit, vel malesuada odio libero at nisl. Donec luctus, ipsum a efficitur varius, diam est lacinia lacus, ac interdum odio lectus vitae odio. Maecenas tempor, elit id fermentum lobortis, sapien nibh posuere tellus, non mattis nisi nisl in ex. Aliquam ultricies mi vitae enim feugiat bibendum. Integer ullamcorper varius purus, id tempor ante lobortis et. Nullam sed consequat leo, eu iaculis lorem.           
+            </p>
+        </div>
+    </section>
+</div>
+{% endblock content %}

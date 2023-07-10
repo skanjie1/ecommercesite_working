@@ -3,6 +3,7 @@ from flask import render_template, session, request, redirect, url_for, flash
 from shop import app, db, bcrypt
 from .forms import RegistrationForm, LoginForm
 from .models import User
+from shop.products.models import Addproduct, Brand, Category
 # from shop.products.models import Addproduct, Brand, Category
 import os
 
@@ -11,10 +12,39 @@ def home():
     # return "Welcome to my shop"
     return render_template('layout.html', title='Home page')
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html', title='Contact Us')
+
+@app.route('/about')
+def about():
+    return render_template('about.html', title='About Us')
+
 @app.route('/adminpage')
 def adminpage():  
-    return render_template('admin/index.html', title='Admin Page')
+    if 'email' not in session:
+        flash(f'Please login first','danger')
+        return redirect(url_for('login'))
+    products = Addproduct.query.all()
+    return render_template('admin/index.html', title='Admin Page', products=products)
 
+@app.route('/brands')
+def brands():
+    if 'email' not in session:
+        flash(f'Please login first','danger')
+        return redirect(url_for('login'))
+    brands = Brand.query.order_by(Brand.id.desc()).all()
+    return render_template('admin/brand.html', title="Brand page", brands=brands)
+
+@app.route('/category')
+def category():
+    if 'email' not in session:
+        flash(f'Please login first','danger')
+        return redirect(url_for('login'))
+    categories = Category.query.order_by(Category.id.desc()).all()
+    return render_template('admin/brand.html', title="Brand page", categories=categories)
+
+ 
 # -------------------------
 # @app.route('/admin')
 # def admin():

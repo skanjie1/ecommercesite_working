@@ -86,7 +86,7 @@
     <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
-        <h5 class="text-center mt-4">Add a product</h5>
+        <h5 class="text-center mt-4">Update product</h5>
         <hr>
         {% from "_formhelpers.html" import render_field %}
         <form action="" method="POST" enctype="multipart/form-data">
@@ -97,18 +97,18 @@
 
             <label for="brand">Add a brand</label>
             <select name="brand" id="brand" class="form-control" required>
-                <option value="">Select a brand</option>
+                <option value="{{product.brand_id}}">{{product.brand.name}}</option>
                 {% for brand in brands %}
-                    <option value="{{brand.id}}"> {{brand.name}} </option>
+            <option value="{{brand.id}}"> {{brand.name}} </option>
                 {% endfor %}
             </select>
 
 
             <label for="category">Add a category</label>
             <select name="category" id="category" class="form-control" required>
-                <option value="">Select a category</option>
+                <option value="{{product.category_id}}">{{product.category.name}}</option>
                 {% for category in categories %}
-                    <option value="{{category.id}}"> {{category.name}} </option>
+            <option value="{{category.id}}"> {{category.name}} </option>
                 {% endfor %}
             </select>
 
@@ -118,13 +118,15 @@
 
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4">{{ render_field(form.image_1, class="form-control")}}</div>
-                    <div class="col-md-4">{{ render_field(form.image_2, class="form-control")}}</div>
-                    <div class="col-md-4">{{ render_field(form.image_3, class="form-control")}}</div>
+                    <div class="col-md-4"><input type="file" name="image_1" class="form-control"></div>
+                    <div class="col-md-4"><input type="file" name="image_2" class="form-control"></div>
+                    <div class="col-md-4"><input type="file" name="image_3" class="form-control"></div>
 
                 </div>
             </div>
-        <p><input type=submit value="Add Product" class="btn btn-info mt-3"></p>
+        <p><input type=submit value="Update Product" class="btn btn-info mt-3"></p>
+        <a href={{url_for('adminpage')}} class="btn btn-warning" style="margin-top: -95px; margin-left: 170px;">Cancel</a>
+
         </form>
     </div>
     <div class="col-md-3"></div>
