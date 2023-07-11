@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<div class="landing-page">
+    <header>
+        <div class="container">
+            <a href="{{url_for('home')}}" class="logo">MOCHI <b>MOCHI</b></a>
+            <ul class="links">
+                <li><a href="{{url_for('home')}}">Home</a></li>
+                <li><a href="{{url_for('products')}}">Products</a></li>
+                <li><a href="{{url_for('contact')}}">Contact Us</a></li>
+                <li><a href="{{url_for('about')}}">About Us</a></li>
+            </ul>
+            <a href="{{ url_for('login') }}" class="logout-link">Login</a>
+        </div>
+    </header>
+</div>
+
+<div class="container">
+    <h1 class="text-center mt-3">Welcome esteemed shopper!</h1>
+    <h5 class="text-center sales mt-3">Shop Now! Sales Ongoing</h5>
+    <hr>
+    <div class="dropdown">
+        <a class="dropdown-button btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Filter by brands
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for brand in brands %}
+            <a class="dropdown-item" href="{{url_for('get_brand', id=brand.id)}}">{{brand.name}}</a>
+            {% endfor %}
+        </div>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="search-form form-control mr-sn-2" type="search" placeholder="Search Product" aria-label="Search">
+            <button class="search-button btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+
+    <div class="row">
+
+        {% if brand %}
+        {% for b in brand %}
+        <div class="col-md-3 mt-3">
+            <div class="card">
+                <img src="{{url_for('static', filename='images/' + b.image_1)}}" alt="{{b.name}}" class="card-img-top" height="190">
+                <div class="card-body">
+                    <h6 class="text-center">{{b.name}}</h6>
+                    <p class="text-center">Ksh.{{b.price}}</p>
+                    {% if b.discount > 0%}
+                    <p class="text-center mt-2 text-success">- Ksh.{{b.discount}}</p>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="float-left btn btn-sm btn-outline-secondary">Details</a>
+                    <a href="#" class="float-right btn btn-sm btn-warning">Add to Cart</a>
+                </div>
+
+            </div>
+        </div>
+
+        {% endfor %}
+
+        {% else %}
+
+        {% for product in products %}
+        <div class="col-md-3 mt-3">
+            <div class="card">
+                <img src="{{url_for('static', filename='images/' + product.image_1)}}" alt="{{product.name}}" class="card-img-top" height="190">
+                <div class="card-body">
+                    <h6 class="text-center">{{product.name}}</h6>
+                    <p class="text-center">Ksh.{{product.price}}</p>
+                    {% if product.discount > 0%}
+                    <p class="text-center mt-2 text-success">- Ksh.{{product.discount}}</p>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="float-left btn btn-sm btn-outline-secondary">Details</a>
+                    <a href="#" class="float-right btn btn-sm btn-warning">Add to Cart</a>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}
