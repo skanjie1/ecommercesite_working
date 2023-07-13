@@ -15,7 +15,10 @@
   /* width: 50px; */
 }
 .dropdown-button{
-  margin-right: 700px;
+  margin-right: 9px;
+}
+.dropdown-categories{
+  margin-right: 510px;
 }
 .search-form{
   display: inline-block;
