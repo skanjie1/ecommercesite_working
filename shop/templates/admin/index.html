@@ -21,12 +21,31 @@
 {% include '_messages.html' %}
 
 <div class="text-center h1">Welcome admin</div>
-<div class="text-center h8 mt-4">View products dashboard</div>
+
+<div class="container">
+    <div class="text-center h5 mt-4">View products</div>
+    <div class="dashboard-button">
+    <a href="{{url_for('dashboard')}}", class="btn btn-sm btn-outline-secondary" style="margin-left: 0px">Back to dashboard</a>
+    <form class="form-inline my-2 my-lg-0">
+        <input class="dashboard-search-form search-form form-control mr-sn-2" type="search" placeholder="Search Product" aria-label="Search">
+        <button class="dashboard-search-button search-button btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</div>
+</div>
 
 
 <div class="area"></div>
     <nav class="main-menu">
     <ul>
+        <li>
+            <a href="{{url_for('dashboard')}}">
+            <i class="fa fa-home fa-2x"></i>
+            <span class="nav-text">
+                Admin Dashboard
+            </span>
+            </a>                               
+        </li>
+        
         <li>
             <a href="{{url_for('addbrand')}}">
             <i class="fa fa-home fa-2x"></i>

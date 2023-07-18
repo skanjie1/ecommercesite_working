@@ -20,6 +20,14 @@ def contact():
 def about():
     return render_template('about.html', title='About Us')
 
+@app.route('/dashboard')
+def dashboard():
+    total_items = Addproduct.query.count()
+    total_brands = Brand.query.count()
+    total_categories = Category.query.count()
+    products = Addproduct.query.all()
+    return render_template('admin/admin.html', title='Dashboard', products=products, total_items=total_items, total_brands=total_brands, total_categories=total_categories)
+
 @app.route('/adminpage')
 def adminpage():  
     if 'email' not in session:
@@ -34,7 +42,8 @@ def brands():
         flash(f'Please login first','danger')
         return redirect(url_for('login'))
     brands = Brand.query.order_by(Brand.id.desc()).all()
-    return render_template('admin/brand.html', title="Brand page", brands=brands)
+    total_brands = Brand.query.count()
+    return render_template('admin/brand.html', title="Brand page", brands=brands, total_brands=total_brands)
 
 @app.route('/category')
 def category():
@@ -42,7 +51,8 @@ def category():
         flash(f'Please login first','danger')
         return redirect(url_for('login'))
     categories = Category.query.order_by(Category.id.desc()).all()
-    return render_template('admin/brand.html', title="Brand page", categories=categories)
+    total_categories = Category.query.count()
+    return render_template('admin/brand.html', title="Brand page", categories=categories, total_categories=total_categories)
 
  
 # -------------------------
@@ -65,7 +75,7 @@ def register():
         db.session.add(user)
         db.session.commit() 
         flash(f'Welcome {form.name.data}. Thank you for registering', 'success')
-        return redirect(url_for('adminpage'))
+        return redirect(url_for('dashboard'))
     
     return render_template('admin/register.html', form=form, title="Registration page")
 
@@ -78,9 +88,9 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             session['email'] = form.email.data
             flash(f'Welcome {form.email.data}. You are logged in', 'success')
-            return redirect(request.args.get('next') or url_for('adminpage'))
+            return redirect(request.args.get('next') or url_for('dashboard'))
         else:
             flash('Wrong Password, please try again', 'danger')
-            return redirect(url_for('login'))
+            return redirect(url_for('dashboard'))
         
     return render_template('admin/login.html', form=form, title="Login Page")

@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="landing-page">
+    <header>
+        <div class="container header-container">
+            <a href="{{url_for('home')}}" class="logo">MOCHI <b>MOCHI</b></a>
+            <ul class="links">
+              <li><a href="{{url_for('home')}}">Home</a></li>
+              <li><a href="{{url_for('products')}}">Products</a></li>
+              <li><a href="{{url_for('contact')}}">Contact Us</a></li>
+              <li><a href="{{url_for('about')}}">About Us</a></li>
+              <li class="cart-item nav-item">
+                <a class="nav=link disabled" href="{{url_for('getCart')}}" tabindex="-1">
+                  <div class="cart-container">
+                  <div class="icon-cart mt-4" style="float: left">
+                    <div class="cart-line-1" style="background-color: #C5BFB6"></div>
+                    <div class="cart-line-2" style="background-color: #C5BFB6"></div>
+                    <div class="cart-line-3" style="background-color: #C5BFB6"></div>
+                    <div class="cart-wheel" style="background-color: #C5BFB6"></div>
+                  </div>
+                  <span class="cart-items-count">({{session['Shoppingcart']|length}})</span>
+                </div>
+                </a>
+            </li>
+          </ul>
+          <a href="{{ url_for('login') }}" class="logout-link">Login</a>
+                
+              </div>
+    </header>
+</div>
+
+<div class="container">
+    <h1 class="text-center mt-3">Welcome esteemed shopper!</h1>
+    <h5 class="text-center sales mt-3">Cart list. Ready to check out?</h5>
+    <hr>
+    <div class="row">
+        <table class="table table-sm table-condensed table-striped table-hover">
+            <thead>
+                <th>Sr</th>
+                <th>Name</th>
+                <th>Color</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Discount</th>
+                <th>Total</th>
+                <th>Update</th>
+                <th>Remove</th>
+                <th></th>
+                <th></th>
+            </thead>
+            <tbody>
+                {% for key, product in session['Shoppingcart'].items() %}
+
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.color}}</td>
+                    <td>Ksh.{{product.price}}</td>
+                    <td>{{product.quantity}}</td>
+                    {% if product.discount > 0 %}
+                    <td>Ksh.{{product.discount}}</td>
+                    {% else %}
+                    <td></td>
+                    {%endif%}
+                    {% set total = product.quantity|int * product.price|float %}
+                    <td>{{"%0.2f"|format((total|float) - product.discount|float)}}</td>
+                    <td><a href="#">Update</a></td>
+                    <td><a href="#">Remove</a></td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td><a href="/">Continue Shopping?</a></td>
+                    <td colspan="4"><h5>Grand Total: Ksh.{{grandtotal}}</h5></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}
+<!--{{session['Shoppingcart']}}-->

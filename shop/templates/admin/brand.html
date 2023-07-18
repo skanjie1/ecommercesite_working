@@ -27,6 +27,15 @@
     <nav class="main-menu">
     <ul>
         <li>
+            <a href="{{url_for('dashboard')}}">
+            <i class="fa fa-home fa-2x"></i>
+            <span class="nav-text">
+                Admin Dashboard
+            </span>
+            </a>                               
+        </li>
+
+        <li>
             <a href="{{url_for('addbrand')}}">
             <i class="fa fa-home fa-2x"></i>
             <span class="nav-text">
@@ -91,7 +100,15 @@
         </thead>
         <tbody>
             {% if brands %}
-            <div class="text-center h8 mt-4">View brands dashboard</div>
+            <div class="container">
+                <div class="text-center h5 mt-4">View brands</div>
+                <div class="dashboard-button">
+                <a href="{{url_for('dashboard')}}", class="btn btn-sm btn-outline-secondary" style="margin-left: 0px">Back to dashboard</a>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="dashboard-search-form search-form form-control mr-sn-2" type="search" placeholder="Search Brand" aria-label="Search">
+                    <button class="dashboard-search-button search-button btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
             <hr>
             {% for brand in brands%}
             <tr>
@@ -133,7 +150,15 @@
             {% endfor %}
 
             {% else %}
-            <div class="text-center h8 mt-4">View categories dashboard</div>
+            <div class="container">
+                <div class="text-center h5 mt-4">View categories</div>
+                <div class="dashboard-button">
+                <a href="{{url_for('dashboard')}}", class="btn btn-sm btn-outline-secondary" style="margin-left: 0px">Back to dashboard</a>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="dashboard-search-form search-form form-control mr-sn-2" type="search" placeholder="Search Categories" aria-label="Search">
+                    <button class="dashboard-search-button search-button btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
             <hr>
             {% for category in categories%}
             <tr>

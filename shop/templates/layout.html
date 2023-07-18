@@ -13,24 +13,37 @@
     {% block content %}
     <div class="landing-page">
       <header>
-        <div class="container">
+        <div class="container header-container">
           <a href="{{url_for('home')}}" class="logo">MOCHI <b>MOCHI</b></a>
           <ul class="links">
             <li><a href="{{url_for('home')}}">Home</a></li>
             <li><a href="{{url_for('products')}}">Products</a></li>
             <li><a href="{{url_for('contact')}}">Contact Us</a></li>
             <li><a href="{{url_for('about')}}">About Us</a></li>
+            <li class="cart-item nav-item">
+              <a class="nav=link disabled" href="{{url_for('getCart')}}" tabindex="-1">
+                <div class="cart-container">
+                <div class="icon-cart mt-4" style="float: left">
+                  <div class="cart-line-1" style="background-color: #C5BFB6"></div>
+                  <div class="cart-line-2" style="background-color: #C5BFB6"></div>
+                  <div class="cart-line-3" style="background-color: #C5BFB6"></div>
+                  <div class="cart-wheel" style="background-color: #C5BFB6"></div>
+                </div>
+                <span class="cart-items-count">({{session['Shoppingcart']|length}})</span>
+              </div>
+              </a>
+          </li>
         </ul>
         <a href="{{ url_for('login') }}" class="logout-link">Login</a>
               
             </div>
             
-            <div id="google_translate_element"></div>      
+            <!--<div id="google_translate_element"></div>      
             <script type="text/javascript">
               function googleTranslateElementInit() {
                 new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
               }
-            </script>
+            </script>-->
 
           </header>
       <div class="content">
@@ -42,7 +55,8 @@
             <button>New here? Explore</button>
           </div>
           <div class="image">
-            <img src="https://wallpapercg.com/media/ts_2x/6575.webp">
+            <!-- <img src="https://wallpapercg.com/media/ts_2x/6575.webp"> -->
+            <img src="https://media.tenor.com/HW3-t_2QGPUAAAAj/%E3%81%AF%E3%81%84-%E3%83%8F%E3%83%AD%E3%83%BC.gif" width="500" height="350">
           </div>
         </div>
       </div>

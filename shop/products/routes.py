@@ -17,6 +17,11 @@ def products():
 
     return render_template('products/index.html', products=products, brands=brands, categories=categories)
 
+@app.route('/product/<int:id>')
+def single_page(id):
+    product = Addproduct.query.get_or_404(id)
+    return render_template('products/single_page.html', product=product)
+
 @app.route('/brand/<int:id>')
 def get_brand(id):
     get_b = Brand.query.filter_by(id=id).first_or_404()
