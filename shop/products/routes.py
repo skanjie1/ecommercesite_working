@@ -1,5 +1,5 @@
 from flask import redirect, render_template, url_for,flash, request, session, current_app
-from shop import db, app, photos
+from shop import db, app, photos, search
 from .models import Brand, Category, Addproduct
 from .forms import Addproducts
 import secrets, os
@@ -8,10 +8,18 @@ import secrets, os
 # def home():
 #     return render_template('layout.html')
 
+def brands():
+    brands = Brand.query.join(Addproduct, (Brand.id == Addproduct.brand_id)).all()
+    return brands
+
+def categories():
+    categories = Category.query.join(Addproduct, (Category.id == Addproduct.category_id)).all()
+    return categories
+
 @app.route('/products')
 def products():
     page = request.args.get('page',1, type=int)
-    products = Addproduct.query.filter(Addproduct.stock > 0).paginate(page=page, per_page=8)
+    products = Addproduct.query.filter(Addproduct.stock > 0).paginate(page=page, per_page=8)  
     brands = Brand.query.join(Addproduct, (Brand.id == Addproduct.brand_id)).all()
     categories = Category.query.join(Addproduct, (Category.id == Addproduct.category_id)).all()
 
@@ -21,6 +29,31 @@ def products():
 def single_page(id):
     product = Addproduct.query.get_or_404(id)
     return render_template('products/single_page.html', product=product)
+
+@app.route('/result')
+def result():    
+    searchword = request.args.get('q')
+    products_query = Addproduct.query.msearch(searchword, fields=['name', 'desc'], limit=8)
+    products = products_query.all()
+    
+    if len(products) == 0:
+        flash('Item not found', 'danger')
+    return render_template('products/result.html', products=products, brands=brands(), categories=categories())
+
+@app.route('/cartresult')
+def cartresult():    
+    searchword = request.args.get('q')
+    search_results = []
+    
+    if 'Shoppingcart' in session:
+        for key, product in session['Shoppingcart'].items():
+            product_name = product['name'].lower()
+            if searchword.lower() in product_name:
+                search_results.append(product)
+    
+    if len(search_results) == 0:
+        flash('Item not found', 'danger')
+    return render_template('products/cartresult.html', products=search_results)
 
 @app.route('/brand/<int:id>')
 def get_brand(id):

@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+{% include 'navbar.html' %}
+
+<div class="container">
+    <h1 class="text-center mt-3">Welcome esteemed shopper!</h1>
+    <h5 class="text-center sales mt-3">Shop Now! Sales Ongoing</h5>
+    <hr>
+    <div class="dropdown">
+        <a class="dropdown-button btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Filter by brands
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for brand in brands %}
+            <a class="dropdown-item" href="{{url_for('get_brand', id=brand.id)}}">{{brand.name}}</a>
+            {% endfor %}
+        </div>
+        <a class="dropdown-button dropdown-categories btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Filter by categories
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for category in categories %}
+              <a class="dropdown-item" href="{{url_for('get_categories', id=category.id)}}">{{category.name}}</a>
+              {% endfor %}
+          </div>
+        <form class="form-inline my-2 my-lg-0" action="{{url_for('result')}}">
+            <input class="search-form form-control mr-sn-2" type="search" placeholder="Search Product" aria-label="Search" name="q">
+            <button class="search-button btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+
+      {% include '_messages.html' %}
+
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3 mt-3">
+            <div class="card"><a href="{{url_for('single_page', id=product.id)}}" style="display: block; color:black;">
+                <img src="{{url_for('static', filename='images/' + product.image_1)}}" alt="{{product.name}}" class="card-img-top" height="190">
+                <div class="card-body">
+                    <h6 class="text-center">{{product.name}}</h6>
+                    <p class="text-center">Ksh.{{product.price}}</p>
+                    {% if product.discount > 0%}
+                    <p class="text-center mt-2 text-success">- Ksh.{{product.discount}}</p>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <form action="{{url_for('AddCart')}}" method="POST">
+                        <a href="{{url_for('single_page', id=product.id)}}" class="float-left btn btn-sm btn-outline-secondary">Details</a>
+                        <input type="hidden" name="product_id" value="{{product.id}}">
+                        <button type="submit" class="btn btn-sm btn-warning" style="margin-left:20px;">Add to Cart</button>
+                       
+                        <input type="hidden" name="quantity" id="" value="1" min="1" max="{{product.stock}}">
+                        {% set colors = product.colors.split(',') %}
+                      
+                        <select name="colors" id="colors" style="visibility: hidden;">
+                            {% for colors in colors %}
+                            {% set col = colors.split(':') %}
+                            <option value="{{col[0]}}">{{col[0]|capitalize}}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </div>
+            </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    </div>
+</div>
+
+{% endblock content %}

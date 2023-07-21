@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_uploads import IMAGES, configure_uploads, UploadSet
-
+from flask_msearch import Search
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -21,6 +21,8 @@ configure_uploads(app, photos)
 
 db.init_app(app)
 bcrypt = Bcrypt(app)
+search = Search()
+search.init_app(app)
 
 from shop.admin import routes
 from shop.products import routes

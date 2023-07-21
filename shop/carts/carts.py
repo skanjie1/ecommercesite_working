@@ -34,16 +34,17 @@ def AddCart():
                     #             flash(iquantity,'success')
                     #             iquantity+=1
                     #             item['quantity'] = iquantity
-                    #             flash('Product updated successfully!nyeeee','success')
+                    #             flash('Product updated successfully','success')
                     #             return redirect(url_for('getCart'))
                     for key, item in session['Shoppingcart'].items():
                         if int(key) == int(product_id):
                             session.modified = True
                             quantity = item.get('quantity', 0)
                             item['quantity'] += 1
-                    print("Product already in cart")
+                    # print("Product already in cart")
                 else:
                     session['Shoppingcart'] = MagerDicts(session['Shoppingcart'], DictItems)
+                    flash('Product added to cart','success')
                     return redirect(request.referrer)
             else:
                 session['Shoppingcart'] = DictItems
@@ -56,7 +57,7 @@ def AddCart():
     
 @app.route('/carts')
 def getCart():
-    if 'Shoppingcart' not in session and len(session['Shoppingcart']) <= 0:
+    if 'Shoppingcart' not in session or len(session['Shoppingcart']) <= 0:
         return redirect(url_for('products'))
     
     grandtotal = 0
@@ -100,7 +101,7 @@ def updatecart(id):
             print(e)
             return redirect(url_for('getCart'))
 
-@app.route('/deleteitem/<int:id>', methods=['POST'])
+@app.route('/deleteitem/<int:id>')
 def deleteitem(id):
     if 'Shoppingcart' not in session and len(session('Shoppingcart')) <= 0:
         return redirect(url_for('products'))

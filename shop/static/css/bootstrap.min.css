@@ -6,7 +6,7 @@
 /*# sourceMappingURL=bootstrap.min.css.map */
 
 .quantity-number{
-  width: 70%;
+  width: 75%;
   border-radius: 5px;
 }
 
@@ -58,12 +58,12 @@
   margin-bottom: 1px;
   /* padding: 5px 5px; */
 }
-
+/* 
 .alert{
   margin-left: 150px;
   margin-right: 80px;
   animation: fadeOut 10s forwards;
-}
+} */
 
 @keyframes fadeOut {
   0% {
