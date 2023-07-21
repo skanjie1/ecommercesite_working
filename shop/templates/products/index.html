@@ -1,34 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
-
-<div class="landing-page">
-    <header>
-        <div class="container header-container">
-            <a href="{{url_for('home')}}" class="logo">MOCHI <b>MOCHI</b></a>
-            <ul class="links">
-              <li><a href="{{url_for('home')}}">Home</a></li>
-              <li><a href="{{url_for('products')}}">Products</a></li>
-              <li><a href="{{url_for('contact')}}">Contact Us</a></li>
-              <li><a href="{{url_for('about')}}">About Us</a></li>
-              <li class="cart-item nav-item">
-                <a class="nav=link disabled" href="{{url_for('getCart')}}" tabindex="-1">
-                  <div class="cart-container">
-                  <div class="icon-cart mt-4" style="float: left">
-                    <div class="cart-line-1" style="background-color: #C5BFB6"></div>
-                    <div class="cart-line-2" style="background-color: #C5BFB6"></div>
-                    <div class="cart-line-3" style="background-color: #C5BFB6"></div>
-                    <div class="cart-wheel" style="background-color: #C5BFB6"></div>
-                  </div>
-                  <span class="cart-items-count">({{session['Shoppingcart']|length}})</span>
-                </div>
-                </a>
-            </li>
-          </ul>
-          <a href="{{ url_for('login') }}" class="logout-link">Login</a>
-                
-              </div>
-    </header>
-</div>
+{% include 'navbar.html' %}
 
 <div class="container">
     <h1 class="text-center mt-3">Welcome esteemed shopper!</h1>
@@ -62,7 +34,7 @@
         {% if brand %}
         {% for b in brand.items %}
         <div class="col-md-3 mt-3">
-            <div class="card">
+            <div class="card"><a href="{{url_for('single_page', id=b.id)}}" style="display: block; color:black;">
                 <img src="{{url_for('static', filename='images/' + b.image_1)}}" alt="{{b.name}}" class="card-img-top" height="190">
                 <div class="card-body">
                     <h6 class="text-center">{{b.name}}</h6>
@@ -88,7 +60,7 @@
                         </select>
                     </form>
                 </div>
-
+            </a>
             </div>
         </div>
         {% endfor %}
@@ -123,7 +95,7 @@
         {% elif get_cat_prod %}
         {% for get_categories in get_cat_prod.items %}
         <div class="col-md-3 mt-3">
-            <div class="card">
+            <div class="card"><a href="{{url_for('single_page', id=get_categories.id)}}" style="display: block; color:black;">
                 <img src="{{url_for('static', filename='images/' + get_categories.image_1)}}" alt="{{get_categories.name}}" class="card-img-top" height="190">
                 <div class="card-body">
                     <h6 class="text-center">{{get_categories.name}}</h6>
@@ -149,7 +121,7 @@
                         </select>
                     </form>
                 </div>
-
+            </a>
             </div>
         </div>
         {% endfor %}
@@ -184,7 +156,7 @@
 
         {% for product in products.items %}
         <div class="col-md-3 mt-3">
-            <div class="card">
+            <div class="card"><a href="{{url_for('single_page', id=product.id)}}" style="display: block; color:black;">
                 <img src="{{url_for('static', filename='images/' + product.image_1)}}" alt="{{product.name}}" class="card-img-top" height="190">
                 <div class="card-body">
                     <h6 class="text-center">{{product.name}}</h6>
@@ -210,7 +182,7 @@
                         </select>
                     </form>
                 </div>
-
+            </a>
             </div>
         </div>
         {% endfor %}
@@ -241,5 +213,6 @@
         {% endif %}
     </div>
 </div>
+
 
 {% endblock content %}

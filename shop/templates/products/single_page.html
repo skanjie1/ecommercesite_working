@@ -1,34 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
+{% include 'navbar.html' %}
 
-<div class="landing-page">
-    <header>
-        <div class="container header-container">
-            <a href="{{url_for('home')}}" class="logo">MOCHI <b>MOCHI</b></a>
-            <ul class="links">
-              <li><a href="{{url_for('home')}}">Home</a></li>
-              <li><a href="{{url_for('products')}}">Products</a></li>
-              <li><a href="{{url_for('contact')}}">Contact Us</a></li>
-              <li><a href="{{url_for('about')}}">About Us</a></li>
-              <li class="cart-item nav-item">
-                <a class="nav=link disabled" href="{{url_for('getCart')}}" tabindex="-1">
-                  <div class="cart-container">
-                  <div class="icon-cart mt-4" style="float: left">
-                    <div class="cart-line-1" style="background-color: #C5BFB6"></div>
-                    <div class="cart-line-2" style="background-color: #C5BFB6"></div>
-                    <div class="cart-line-3" style="background-color: #C5BFB6"></div>
-                    <div class="cart-wheel" style="background-color: #C5BFB6"></div>
-                  </div>
-                  <span class="cart-items-count">({{session['Shoppingcart']|length}})</span>
-                </div>
-                </a>
-            </li>
-          </ul>
-          <a href="{{ url_for('login') }}" class="logout-link">Login</a>
-                
-              </div>
-    </header>
-</div>
 
 <div class="container">
     <h1 class="text-center mt-3">Welcome esteemed shopper!</h1>
@@ -50,24 +23,26 @@
             <hr>
             <form action="{{url_for('AddCart')}}" method="POST">
                 <input type="hidden" name="product_id" value="{{product.id}}">
-                <button type="submit" class="btn btn-sm btn-warning">Add to Cart</button>
                 <label for="">Quantity:</label>
-                <input type="number" name="quantity" id="" value="1" min="1" max="{{product.stock}}">
+                <input type="number" class="quantity-single" name="quantity" id="" value="1" min="1" max="{{product.stock}}">
+                
                 {% set colors = product.colors.split(',') %}
                 <label for="colors">Colors:</label>
-                <select name="colors" id="">
+                <select name="colors" id="colors">
                     {% for colors in colors %}
                     {% set col = colors.split(':') %}
-                    <option value="{{col[0]}}">{{col[0]|capitalize}}</option>
+                    <option value="{{col[0]}}">{{col[0]}}</option>
                     {% endfor %}
                 </select>
+                <br> <br>
+                <button type="submit" class="single-cart btn btn-sm btn-warning">Add to Cart</button>
             </form>
-           
-            <a href={{url_for('products')}} class="btn btn-outline-secondary mt-3" >Cancel</a>
+           <hr>
+            <a href={{url_for('products')}} class="cancel-cart btn btn-outline-secondary mt-3" >Cancel</a>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 mt-5" id="s_image">
+        <div class="col-md-12 mt-5" class="s_image" id="s_image">
             <h6>See more like this!</h6>
             <img src="{{url_for('static', filename='images/' + product.image_1)}}" alt="{{product.name}}" width="120" height="120" style="margin-right: 80px">
             <img src="{{url_for('static', filename='images/' + product.image_2)}}" alt="{{product.name}}" width="120" height="120" style="margin-right: 80px">
