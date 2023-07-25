@@ -12,7 +12,7 @@
                 <li><a href="{{url_for('contact')}}">Contact Us</a></li>
                 <li><a href="{{url_for('about')}}">About Us</a></li>
             </ul>
-            <a href="{{ url_for('register') }}" class="logout-link">Sign Up</a>
+            <a href="{{ url_for('customer_register') }}" class="logout-link">Sign Up</a>
         </div>
     </header>
 </div>
@@ -33,10 +33,11 @@
         <div>
             {{ render_field(form.email, class="form-control") }}
             {{ render_field(form.password, class="form-control") }}
+            {{ form.submit(class="btn btn-info") }}
+
         </div>
 
-        <p><input type=submit value="Login" class="btn btn-info mt-3"></p>
-        <p>Not a member?</p><a href="{{ url_for('register')}}">SIGN IN</a>
+        <p>Not a member?</p><a href="{{ url_for('customer_register')}}">SIGN IN</a>
     </form>
 </div>
     <div class="col-md-4"></div>

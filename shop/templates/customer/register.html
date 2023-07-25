@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+{% from "_formhelpers.html" import render_field %}
+
+<style>
+    .error-message {
+        color: red;
+    }
+</style>
+
+<div class="landing-page">
+    <header>
+        <div class="container">
+            <a href="{{url_for('home')}}" class="logo">MOCHI <b>MOCHI</b></a>
+            <ul class="links">
+                <li><a href="{{url_for('home')}}">Home</a></li>
+                <li><a href="{{url_for('products')}}">Products</a></li>
+                <li><a href="{{url_for('contact')}}">Contact Us</a></li>
+                <li><a href="{{url_for('about')}}">About Us</a></li>
+            </ul>
+            <a href="{{ url_for('customerLogin') }}" class="logout-link">Login</a>
+        </div>
+    </header>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <h1 class="text-center">Register</h1>
+        </div>
+        <div class="col-md-2"></div>
+
+    </div>
+    <form action="" method="post">
+        {{form.csrf_token }}
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                {{ render_field(form.name, class="form-control")}}
+                {{ render_field(form.username, class="form-control")}}
+                {{ render_field(form.email, class="form-control") }}
+                {{ render_field(form.password, class="form-control") }}   
+                {{ render_field(form.confirm, class="form-control")}}
+                {{form.profile() }}
+            </div>
+            <div class="col-md-4">
+                {{ render_field(form.country, class="form-control")}}
+                {{ render_field(form.city, class="form-control")}}
+                {{ render_field(form.contact, class="form-control")}}
+                {{ render_field(form.address, class="form-control")}}
+                {{ render_field(form.zipcode, class="form-control")}}
+                {{ form.submit(class="btn btn-info") }}
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}
