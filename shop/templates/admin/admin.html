@@ -68,7 +68,7 @@
             <a href="{{url_for('brands')}}">
                 <i class="fa fa-home fa-2x"></i>
                 <span class="nav-text">
-                    View Brands
+                    Manage Brands
                 </span>
             </a>                               
         </li>
@@ -76,7 +76,7 @@
             <a href="{{url_for('category')}}">
                 <i class="fa fa-home fa-2x"></i>
                 <span class="nav-text">
-                    View Categories
+                    Manage Categories
             </span>
         </a>                               
     </li>
@@ -84,7 +84,15 @@
         <a href="{{url_for('adminpage')}}">
             <i class="fa fa-home fa-2x"></i>
             <span class="nav-text">
-                View Products
+                Manage Products
+            </span>
+        </a>                               
+    </li>
+    <li>
+        <a href="{{url_for('admin_orders')}}">
+            <i class="fa fa-home fa-2x"></i>
+            <span class="nav-text">
+                Manage Orders
             </span>
         </a>                               
     </li>
@@ -97,18 +105,27 @@
     {% include '_messages.html' %}
 <div>
     <a class="dashboard-card" href="{{url_for('adminpage')}}">
-        <h5 class="text-center">View Products</h5>
+        <h5 class="text-center">Manage Products</h5>
         <p class="text-center mt-4">Total Number of items: <br><b class="text-danger">{{total_items}}</b></p>
 
     </a>
     <a class="dashboard-card" href="{{url_for('brands')}}">
-        <h5 class="text-center">View Brands</h5>
+        <h5 class="text-center">Manage Brands</h5>
         <p class="text-center mt-4">Total Number of brands: <br> <b class="text-danger">{{total_brands}}</b></p>
     </a>
     <a class="dashboard-card" href="{{url_for('category')}}">
-        <h5 class="text-center">View Categories</h5>
+        <h5 class="text-center">Manage Categories</h5>
         <p class="text-center mt-4">Total Number of categories: <br> <b class="text-danger">{{total_categories}}</b></p>
     </a>
+</div>
+
+<div>
+    <a class="dashboard-card" href="{{url_for('admin_orders')}}">
+        <h5 class="text-center">Manage Orders</h5>
+        <p class="text-center mt-4">Total Number of items: <br><b class="text-danger">{{total_items}}</b></p>
+
+    </a>
+
 </div>
 
   

@@ -23,7 +23,7 @@
 <div class="text-center h1">Welcome admin</div>
 
 <div class="container">
-    <div class="text-center h5 mt-4">View products</div>
+    <div class="text-center h5 mt-4">Manage products</div>
     <div class="dashboard-button">
     <a href="{{url_for('dashboard')}}", class="btn btn-sm btn-outline-secondary" style="margin-left: 0px">Back to dashboard</a>
     <form class="form-inline my-2 my-lg-0">
@@ -76,7 +76,7 @@
             <a href="{{url_for('brands')}}">
             <i class="fa fa-home fa-2x"></i>
             <span class="nav-text">
-                View Brands
+                Manage Brands
             </span>
             </a>                               
         </li>
@@ -84,7 +84,7 @@
             <a href="{{url_for('category')}}">
             <i class="fa fa-home fa-2x"></i>
             <span class="nav-text">
-                View Categories
+                Manage Categories
             </span>
             </a>                               
         </li>
@@ -92,8 +92,16 @@
             <a href="{{url_for('adminpage')}}">
             <i class="fa fa-home fa-2x"></i>
             <span class="nav-text">
-                View Products
+                Manage Products
             </span>
+            </a>                               
+        </li>
+        <li>
+            <a href="{{url_for('admin_orders')}}">
+                <i class="fa fa-home fa-2x"></i>
+                <span class="nav-text">
+                    Manage Orders
+                </span>
             </a>                               
         </li>
     </ul>

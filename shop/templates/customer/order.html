@@ -4,58 +4,50 @@
 
 <div class="container">
     <h1 class="text-center mt-3">Welcome esteemed shopper!</h1>
-    <h5 class="text-center sales mt-3">Cart list. Ready to check out?</h5>
+    <h5 class="text-center sales mt-3">Confirm Order.Ready to check out?</h5>
     <hr>
-    <div class="container">
-        <div class="dashboard-button" style="margin-bottom: 10px; margin-top: 5px;">
-        <a href="{{url_for('products')}}", class="btn btn-sm btn-info" style="margin-left: 0px">Continue shopping?</a>
-        <form class="form-inline my-2 my-lg-0" action="{{url_for('cartresult')}}">
-            <input class="dashboard-search-form search-form form-control mr-sn-2" type="search" placeholder="Search Product" aria-label="Search" style="margin-left: 710px;" name="q">
-            <button class="dashboard-search-button search-button btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
     {% include '_messages.html' %}
+    <div class="row">
+        <h5 class="text-center"><b>Order Information</b></h5>
+       <p> Invoice: {{orders.invoice}}
+        <br>
+        Status: {{orders.status}}
+        <br>
+        Customer Name: {{customer.name}}
+        <br>
+        Customer Email: {{customer.email}}
+        <br>
+        Customer Contact: {{customer.contact}}
+       </p>
+    </div>
+
     <div class="cartpage-container">
         <div class="cartpage-table-container">
         <table class="table table-sm table-condensed table-striped table-hover">
             <thead>
                 <th>Sr</th>
-                <th>Image</th>
                 <th>Name</th>
                 <th>Color</th>
                 <th>Price </th>
                 <th>Quantity</th>
                 <th>Discount </th>
                 <th>Total </th>
-                <th>Update</th>
-                <th>Remove</th>
             </thead>
             <tbody>
-                {% for key, product in session['Shoppingcart'].items() %}
+                {% for key, product in orders.orders.items() %}
                 <tr> 
                     <td>{{loop.index}}</td>
-                    <td> <a href="{{url_for('single_page', id=key)}}">
-                        <img src="{{url_for('static',filename='images/'+product.image)}}" alt="{{product.name}}" width="130" height="130">
-                    </a>
-                    </td>
-                    <td><a href="{{url_for('single_page', id=key)}}" style="color: black;">
+                  
+                    <td>
                        {{ product.name }}
-                    </a>
+                    
                     </td>
                     <form action="{{url_for('updatecart', id=key)}}" method="POST">
                         <td>
-                            {% set colors = product.colors.split(',') %}
-                        
-                            <select name="color" id="color">
-                                <option value="{{product.color}}" style="display: none;">{{product.color}}</option>
-                                {% for colors in colors %}
-                                {% set col = colors.split(':') %}
-                                <option value="{{col[0]}}">{{col[0]}}</option>
-                                {% endfor %}
-                            </select>
+                            {{product.color}}
                         </td> 
                         <td>Ksh.{{product.price}}</td>
-                        <td><input type="number" name="quantity" class="quantity-number" min="1" max="{{product.stock}}" value="{{product.quantity}}"></td>
+                        <td>{{product.quantity}}</td>
                         {% if product.discount > 0 %}
                         <td>Ksh.{{product.discount}}</td>
                         {% else %}
@@ -63,14 +55,9 @@
                         {%endif%}
                         {% set total = product.quantity|int * (product.price|float - product.discount|float) %}
                         <td>Ksh.{{ "%0.2f"|format(total) }}</td>
-                        <td><button type="submit" class="btn btn-sm btn-outline-info">Update</button></td>
+
                     </form>
-                    <td>
-                         <a href="{{url_for('deleteitem', id=key)}}" class="btn btn-sm btn-outline-danger">Remove</a> 
-                       <!-- <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-{{id}}">
-                            Remove
-                        </button> -->
-                    </td>
+              
                 </tr>
                  <!-- Modal -->
   <!-- <div class="modal fade" id="exampleModal-{{product.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -103,16 +90,15 @@
     
   
         <div class="cartpage-summary-container">
-            <h4>CART SUMMARY</h4>
+            <h4>GRAND TOTAL</h4>
             <hr>
-            <p>Grand Total:
-            <h5> Ksh.{{grandtotal}}</b></h5>   
-            <p class="text-secondary">Please note taxes are not included yet.</p> 
+            <h5> Ksh.{{grandtotal}}</b></h5>               
+            <a href="#" class="btn btn-sm btn-success mt-2">BUY NOW (Ksh.{{grandtotal}})</a>
             <hr>
             <p><b>Services</b></p>   
             <p class="text-secondary">✔ 35 day buyer protection</p> 
             <p class="text-secondary">✔ 1 year warranty on electronics</p> 
-            <a href="{{url_for('get_order')}}" class="btn btn-sm btn-success mt-2">CHECK OUT</a>
+            <a href="#" class="btn btn-sm btn-danger mt-2">GENERATE PDF</a>
          
         </div>
   
