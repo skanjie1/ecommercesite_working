@@ -1,5 +1,6 @@
 from flask import redirect, render_template, url_for,flash, request, session, current_app
 from shop import db, app, photos, search
+from flask_login import login_required
 from .models import Brand, Category, Addproduct
 from .forms import Addproducts
 import secrets, os
@@ -17,6 +18,7 @@ def categories():
     return categories
 
 @app.route('/products')
+@login_required
 def products():
     page = request.args.get('page',1, type=int)
     products = Addproduct.query.filter(Addproduct.stock > 0).paginate(page=page, per_page=8)  

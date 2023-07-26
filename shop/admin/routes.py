@@ -91,6 +91,6 @@ def login():
             return redirect(request.args.get('next') or url_for('dashboard'))
         else:
             flash('Wrong Password, please try again', 'danger')
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('login'))
         
     return render_template('admin/login.html', form=form, title="Login Page")
