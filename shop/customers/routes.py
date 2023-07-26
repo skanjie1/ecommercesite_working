@@ -25,6 +25,7 @@ def customerLogin():
     form = CustomerLoginForm()
     if form.validate_on_submit():
         user = Register.query.filter_by(email=form.email.data).first()
+        # user = Register.query.all()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
             # session['email'] = form.email.data
@@ -37,7 +38,12 @@ def customerLogin():
     
     return render_template('/customer/login.html', form=form)
 
+@app.route('/customer/logout')
+def customer_logout():
+    logout_user()
+    return redirect(url_for('customerLogin'))
 
 
+ 
  
 

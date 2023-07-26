@@ -21,8 +21,11 @@
                 </a>
             </li>
           </ul>
-          <a href="{{ url_for('login') }}" class="logout-link">Login</a>
-                
+          {% if current_user.is_authenticated %}
+          <a href="{{ url_for('customer_logout') }}" class="logout-link">Logout</a>
+          {% else %}
+          <a href="{{ url_for('customerLogin') }}" class="logout-link">Login</a>
+          {% endif %}
               </div>
     </header>
 </div>

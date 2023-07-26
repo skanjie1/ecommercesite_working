@@ -40,7 +40,7 @@ def AddCart():
                         if int(key) == int(product_id):
                             session.modified = True
                             quantity = item.get('quantity', 0)
-                            item['quantity'] += 1
+                            item['quantity'] = item['quantity'] + 1
                     # print("Product already in cart")
                 else:
                     session['Shoppingcart'] = MagerDicts(session['Shoppingcart'], DictItems)

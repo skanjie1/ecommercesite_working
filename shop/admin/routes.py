@@ -1,4 +1,5 @@
 from flask import render_template, session, request, redirect, url_for, flash
+from flask_login import login_required, current_user, logout_user, login_user
 
 from shop import app, db, bcrypt
 from .forms import RegistrationForm, LoginForm
@@ -21,6 +22,7 @@ def about():
     return render_template('about.html', title='About Us')
 
 @app.route('/dashboard')
+@login_required
 def dashboard():
     total_items = Addproduct.query.count()
     total_brands = Brand.query.count()
@@ -94,3 +96,8 @@ def login():
             return redirect(url_for('login'))
         
     return render_template('admin/login.html', form=form, title="Login Page")
+
+@app.route('/logout')
+def admin_logout():
+    logout_user()
+    return redirect(url_for('login'))
