@@ -1,12 +1,10 @@
 from flask import render_template, session, request, redirect, url_for, flash
 from flask_login import login_required, current_user, logout_user, login_user
-
 from shop import app, db, bcrypt
 from .forms import RegistrationForm, LoginForm
 from .models import User
-
+from shop.customers.model import CustomerOrder
 from shop.products.models import Addproduct, Brand, Category
-# from shop.products.models import Addproduct, Brand, Category
 import os
 
 @app.route('/')
@@ -28,9 +26,9 @@ def dashboard():
     total_items = Addproduct.query.count()
     total_brands = Brand.query.count()
     total_categories = Category.query.count()
-    # total_orders = CustomerOrder.query.count()
+    total_orders = CustomerOrder.query.count()
     products = Addproduct.query.all()
-    return render_template('admin/admin.html', title='Dashboard', products=products, total_items=total_items, total_brands=total_brands, total_categories=total_categories)
+    return render_template('admin/admin.html', title='Dashboard', products=products, total_items=total_items, total_brands=total_brands, total_categories=total_categories, total_orders=total_orders)
 
 @app.route('/adminpage')
 def adminpage():  
