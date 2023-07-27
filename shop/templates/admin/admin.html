@@ -13,11 +13,8 @@
                 <li><a href="{{url_for('contact')}}">Contact Us</a></li>
                 <li><a href="{{url_for('about')}}">About Us</a></li>
             </ul>
-            {% if current_user.is_authenticated %}
-            <a href="{{ url_for('admin_logout') }}" class="logout-link">Logout</a>
-            {% else %}
-            <a href="{{ url_for('login') }}" class="logout-link">Login</a>
-            {% endif %}
+           
+            <a href="{{ url_for('login') }}" class="logout-link">Logout</a>           
             </div>
     </header>
 </div>

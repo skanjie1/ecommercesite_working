@@ -11,11 +11,7 @@
                 <li><a href="{{url_for('contact')}}">Contact Us</a></li>
                 <li><a href="{{url_for('about')}}">About Us</a></li>
             </ul>
-            {% if current_user.is_authenticated %}
-            <a href="{{ url_for('admin_logout') }}" class="logout-link">Logout</a>
-            {% else %}
-            <a href="{{ url_for('login') }}" class="logout-link">Login</a>
-            {% endif %}
+            <a href="{{ url_for('login') }}" class="logout-link">Logout</a>           
         </div>
     </header>
 </div>
@@ -95,17 +91,17 @@
     </nav>
 
 <div class="container">
-    {% include '_messages.html' %}
-
+    
     <div class="text-center h1">Welcome admin</div>
     
     <div class="text-center h5 mt-4">Manage Orders</div>
     <hr>
+    {% include '_messages.html' %}
     <div class="container">
         <div class="dashboard-button">
         <a href="{{url_for('dashboard')}}", class="btn btn-sm btn-outline-secondary" style="margin-left: 0px">Back to dashboard</a>
         <form class="form-inline my-2 my-lg-0">
-            <input class="dashboard-search-form search-form form-control mr-sn-2" type="search" placeholder="Search Product" aria-label="Search">
+            <input class="dashboard-search-form search-form form-control mr-sn-2" type="search" placeholder="Search Order" aria-label="Search">
             <button class="dashboard-search-button search-button btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
@@ -117,7 +113,7 @@
                 <th>Customer Name</th>
                 <th>Customer Email</th>
                 <th>Date Created</th>
-              
+            
             </tr>
         </thead>
         <tbody>
@@ -127,8 +123,7 @@
                 <td>{{ order.status }}</td>
                 <td>{{ order.customer.name }}</td>
                 <td>{{ order.customer.email }}</td>
-                <td>{{ order.date_created }}</td>
-               
+                <td>{{ order.date_created }}</td> 
             </tr>
             {% endfor %}
         </tbody>

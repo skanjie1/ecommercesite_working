@@ -156,9 +156,21 @@ def orders(invoice):
 
 @app.route('/admin/orders')
 def admin_orders():
-    orders = CustomerOrder.query.all()
+    # orders = CustomerOrder.query.all()
+    orders = CustomerOrder.query.order_by(CustomerOrder.date_created.desc()).all()
+
     return render_template('admin/orders.html', orders=orders)
 
+@app.route('/delete_order/<int:order_id>', methods=['POST', 'DELETE'])
+# @login_required
+def delete_order(order_id):
+    if request.method == 'POST':
+        order = CustomerOrder.query.get_or_404(order_id)
+        db.session.delete(order)
+        db.session.commit()
+
+        flash('Order has been deleted successfully.', 'success')
+    return redirect(url_for('admin_orders'))
 
 
 @app.route('/getpdf/<invoice>',methods=['POST'])
