@@ -98,6 +98,19 @@
             <h3>Reviews</h3>
             <h5 style="color: #5d5d5d;">-See what our customers are saying about us-</h5>
         </div>
+        <div class="container">
+            {% for review in reviews %}
+                <div class="card mb-3">
+                    <div class="review_card card-body">
+                        <h5 class="card-title">{{ review.name }}</h5>
+                        {% set sentiment_score = review.content | sentiment_score %}
+                        {% if sentiment_score > 0 %}
+                            <p class="card-text">{{ review.content }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
     <br><br><br><br><br><br><br>
 </div>  

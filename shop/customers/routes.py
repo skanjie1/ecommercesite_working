@@ -1,12 +1,13 @@
 from flask import redirect, render_template, url_for,flash, request, session, current_app, make_response
 from flask_login import login_required, current_user, logout_user, login_user
 from shop import db, app, photos, search, bcrypt, login_manager
-from .forms import CustomerRegisterForm, CustomerLoginForm
-from .model import Register, CustomerOrder
+from .forms import CustomerRegisterForm, CustomerLoginForm, ReviewForm
+from .model import Register, CustomerOrder, Review
 from shop.products.models import Addproduct
 import secrets, os
 import stripe
 import pdfkit
+from textblob import TextBlob
 
 publishable_key ='pk_test_51NYNtSFRhtvUWoeCZPlXkOK2By9c4flbaTz5pXuBTQ5F7FMclyzTNqzmY9Z9yLWf9HD4ARnGZEbDFn9WWXFuR2A200og3ph3xW'
 stripe.api_key = 'sk_test_51NYNtSFRhtvUWoeCU8mUOTG9jzNNraUXLGK2RZ3sMt7kLowrMykIOqzfg35ahNeDj1bkm0UC44EyeEpeKjyow3i400iJCWO5ME'
@@ -33,15 +34,32 @@ def payment():
     db.session.commit()
     return redirect(url_for('thanks'))
 
-@app.route('/thanks')
+@app.route('/thanks', methods=['GET','POST'])
 def thanks():
     orders = CustomerOrder.query.filter_by(customer_id=current_user.id).order_by(CustomerOrder.id.desc()).first()
+    
+    form = ReviewForm()
+    if form.validate_on_submit(): 
+        review = Review(name=form.name.data, email=form.email.data, content=form.content.data)
+        db.session.add(review)
+        db.session.commit()
+        flash('Review submitted successfully!', 'success')
+        return redirect(url_for('thanks'))
 
-    return render_template('customer/thanks.html', orders=orders)
+    reviews = Review.query.order_by(Review.pub_date.desc()).all()
+    
+    return render_template('customer/thanks.html', orders=orders, form=form, reviews=reviews)
+
+@app.template_filter('sentiment_score')
+def sentiment_score(text):
+    blob = TextBlob(text)
+    return blob.sentiment.polarity
 
 @app.route('/explore')
 def explore():
-    return render_template('customer/explore.html')
+    reviews = Review.query.order_by(Review.pub_date.desc()).limit(5).all()
+    positive_reviews = [review for review in reviews if sentiment_score(review.content) > 0]
+    return render_template('customer/explore.html', reviews=positive_reviews)
 
 @app.route('/customer/register', methods=['GET','POST'])
 def customer_register():
@@ -206,6 +224,23 @@ def get_pdf(invoice):
             response.headers['content-Disposition'] = 'inline: filename='+invoice+'.pdf'
             return response
     return request(url_for('home'))
+
+# @app.route('/review', methods=['GET', 'POST'])
+# def review():
+#     if request.method == 'POST':
+#         name = request.form.get('name')
+#         email = request.form.get('email')
+#         content = request.form.get('content')
+
+#         if name and email and content:
+#             review = Review(name=name, email=email, content=content)
+#             db.session.add(review)
+#             db.session.commit()
+#             flash('Review submitted successfully!', 'success')
+#         else:
+#             flash('Please fill all the fields.', 'danger')
+
+#     return render_template('customer/thanks.html')
 
   
 

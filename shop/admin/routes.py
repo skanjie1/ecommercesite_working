@@ -3,7 +3,7 @@ from flask_login import login_required, current_user, logout_user, login_user
 from shop import app, db, bcrypt
 from .forms import RegistrationForm, LoginForm
 from .models import User
-from shop.customers.model import CustomerOrder
+from shop.customers.model import CustomerOrder, Review
 from shop.products.models import Addproduct, Brand, Category
 import os
 
@@ -27,8 +27,15 @@ def dashboard():
     total_brands = Brand.query.count()
     total_categories = Category.query.count()
     total_orders = CustomerOrder.query.count()
+    total_reviews = Review.query.count()
+
     products = Addproduct.query.all()
-    return render_template('admin/admin.html', title='Dashboard', products=products, total_items=total_items, total_brands=total_brands, total_categories=total_categories, total_orders=total_orders)
+    return render_template('admin/admin.html', title='Dashboard', products=products, total_items=total_items, total_brands=total_brands, total_categories=total_categories, total_orders=total_orders, total_reviews=total_reviews)
+
+@app.route('/reviews')
+def admin_reviews():
+    reviews = Review.query.order_by(Review.pub_date.desc()).all()
+    return render_template('admin/reviews.html', reviews=reviews)
 
 @app.route('/adminpage')
 def adminpage():  

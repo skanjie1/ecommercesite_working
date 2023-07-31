@@ -1,9 +1,14 @@
 from wtforms import Form, StringField, TextAreaField, PasswordField, SubmitField, validators, ValidationError
 from flask_wtf.file import FileRequired, FileAllowed, FileField
+from wtforms.validators import DataRequired, Email
 from flask_wtf import FlaskForm
 from .model import Register
 
-
+class ReviewForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    content = TextAreaField('Review', validators=[DataRequired()])
+    submit = SubmitField('Send Now!')
 
 class CustomerRegisterForm(FlaskForm):
     name = StringField('Name: ')

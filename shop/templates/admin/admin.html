@@ -93,6 +93,14 @@
             </span>
         </a>                               
     </li>
+    <li>
+        <a href="{{url_for('admin_reviews')}}">
+            <i class="fa fa-home fa-2x"></i>
+            <span class="nav-text">
+                Customer Reviews
+            </span>
+        </a>                               
+    </li>
 </ul>
 
 </nav>
@@ -120,6 +128,11 @@
     <a class="dashboard-card" href="{{url_for('admin_orders')}}">
         <h5 class="text-center">Manage Orders</h5>
         <p class="text-center mt-4">Total Number of orders: <br><b class="text-danger">{{total_orders}}</b></p>
+
+    </a>
+    <a class="dashboard-card" href="{{url_for('admin_reviews')}}">
+        <h5 class="text-center">Customer Reviews</h5>
+        <p class="text-center mt-4">Total Number of reviews: <br><b class="text-danger">{{total_reviews}}</b></p>
 
     </a>
 

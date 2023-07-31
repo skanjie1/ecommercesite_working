@@ -5,6 +5,7 @@ from flask_uploads import IMAGES, configure_uploads, UploadSet
 from flask_msearch import Search
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from textblob import TextBlob
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -34,6 +35,9 @@ login_manager.login_view='customerLogin'
 login_manager.needs_refresh_message_category='danger'
 login_manager.login_message_category ='danger'
 login_manager.login_message = "Hello! Please login first"
+
+
+
 
 from shop.admin import routes
 from shop.products import routes
