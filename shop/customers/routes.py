@@ -38,6 +38,10 @@ def thanks():
 
     return render_template('customer/thanks.html', orders=orders)
 
+@app.route('/explore')
+def explore():
+    return render_template('customer/explore.html')
+
 @app.route('/customer/register', methods=['GET','POST'])
 def customer_register():
     form = CustomerRegisterForm() 
