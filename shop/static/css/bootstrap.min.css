@@ -799,7 +799,7 @@ body {
 .slider-container {
   position: relative;
   width: 100%;
-  max-width: 900px; 
+  max-width: 1000px; 
   margin: 0 auto;
   overflow: hidden;
 }
@@ -808,6 +808,9 @@ body {
   display: flex;
   width: 300%; 
   transition: transform 0.4s ease-in-out;
+  border-radius: 12px;
+  /* overflow: hidden; */
+  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0,0.1);
   /* position: relative; */
 }
 /* .slide{
@@ -847,4 +850,265 @@ body {
   cursor: pointer;
   margin: 0 10px;
   color: #ff00aa;
+}
+
+/* fast selling products */
+.explore_cards {
+  width: 100%;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+  max-width: 1000px;
+}
+
+.card--1 .card__img, .card--1 .card__img--hover {
+  background-image: url('https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/95/196384/1.jpg?7148');
+}
+
+.card--2 .card__img, .card--2 .card__img--hover {
+  background-image: url('https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/94/3436021/1.jpg?3793');
+}
+
+.card--3 .card__img, .card--3 .card__img--hover {
+  background-image: url('https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/53/8880521/1.jpg?0471');
+}
+
+.card--4 .card__img, .card--4 .card__img--hover {
+  background-image: url('https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/96/196384/1.jpg?7146');
+}
+
+
+.card__like {
+  width: 18px;
+}
+
+.card__img {
+  visibility: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 235px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  
+}
+
+.card__info-hover {
+  position: absolute;
+  padding: 16px;
+  width: 100%;
+  opacity: 0;
+  top: 0;
+}
+
+.card__img--hover {
+  transition: 0.2s all ease-out;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  position: absolute;
+  height: 235px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  top: 0;
+  
+}
+.explore_card {
+  margin-right: 30px;
+  margin-left: 10px;
+  transition: all .4s cubic-bezier(0.175, 0.885, 0, 1);
+  background-color: #fff;
+  width: 33.3%;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0,0.1);
+}
+.explore_card:hover {
+  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0,0.1);
+  transform: scale(1.10, 1.10);
+}
+
+.card__info {
+  z-index: 2;
+  background-color: #fff;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  padding: 16px 24px 24px 24px;
+}
+
+.card__category {
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: #868686;
+}
+
+.card__title {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.card__by {
+  font-size: 12px;
+}
+
+.card__price {
+  font-weight: 600;
+  text-decoration: none;
+  color: #ff00aa;
+}
+
+.explore_card:hover .card__img--hover {
+  height: 100%;
+  opacity: 0.3;
+}
+
+.explore_card:hover .card__info {
+  background-color: transparent;
+  position: relative;
+}
+
+.explore_card:hover .card__info-hover {
+  opacity: 1;
+}
+
+/* footer */
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+.footer-section {
+background: #5d5d5d;
+position: relative;
+}
+.footer-cta {
+border-bottom: 1px solid #373636;
+}
+.single-cta i {
+color: black;
+font-size: 30px;
+float: left;
+margin-top: 8px;
+}
+.cta-text {
+padding-left: 15px;
+display: inline-block;
+}
+.cta-text h4 {
+color: #fff;
+font-size: 20px;
+font-weight: 600;
+margin-bottom: 2px;
+}
+.cta-text span {
+color: black;
+font-size: 15px;
+}
+.footer-content {
+position: relative;
+z-index: 2;
+}
+.footer-pattern img {
+position: absolute;
+top: 0;
+left: 0;
+height: 330px;
+background-size: cover;
+background-position: 100% 100%;
+}
+.footer-logo {
+margin-bottom: 30px;
+}
+.footer-logo img {
+  max-width: 200px;
+}
+.footer-text p {
+margin-bottom: 14px;
+font-size: 14px;
+color: black;
+line-height: 28px;
+}
+
+.footer-widget-heading h3 {
+color: #fff;
+font-size: 20px;
+font-weight: 600;
+margin-bottom: 40px;
+position: relative;
+}
+.footer-widget-heading h3::before {
+content: "";
+position: absolute;
+left: 0;
+bottom: -15px;
+height: 2px;
+width: 50px;
+background: #ff00aa;
+}
+.footer-widget ul li {
+  display: inline-block;
+  float: left;
+  width: 50%;
+  margin-bottom: 12px;
+}
+.footer-widget ul li a:hover{
+color: #ff00aa;
+}
+.footer-widget ul li a {
+color: black;
+text-transform: capitalize;
+}
+.subscribe-form {
+position: relative;
+overflow: hidden;
+}
+.subscribe-form input {
+width: 100%;
+padding: 14px 28px;
+background: #fff;
+border: 1px;
+/* border-radius: 10px; */
+color: #5d5d5d;
+}
+.subscribe-form button {
+  position: absolute;
+  right: 0;
+  background: #ff00aa;
+  padding: 13px 20px;
+  border: 1px solid #ff00aa;
+  /* border-radius: 10px; */
+  top: 0;
+}
+.subscribe-form button i {
+color: #fff;
+font-size: 22px;
+transform: rotate(-6deg);
+}
+.copyright-area{
+background: #202020;
+padding: 25px 0;
+}
+.copyright-text p {
+margin: 0;
+font-size: 14px;
+color: #878787;
+}
+.copyright-text p a{
+color: #ff5e14;
+}
+.footer-menu li {
+display: inline-block;
+margin-left: 20px;
+}
+.footer-menu li:hover a{
+color: #ff5e14;
+}
+.footer-menu li a {
+font-size: 14px;
+color: #878787;
 }

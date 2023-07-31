@@ -2,6 +2,7 @@ from shop import db, app
 # from flask_sqlalchemy import SQLAlchemy
 # from flask import Flask
 from datetime import datetime
+from shop.customers.model import CustomerOrder
 
 # app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
@@ -9,7 +10,6 @@ from datetime import datetime
 
 # db = SQLAlchemy(app)
 
-# create database models
 class Addproduct(db.Model):
     __searchbale__ = ['name', 'desc']
     id = db.Column(db.Integer, primary_key=True)
@@ -31,9 +31,11 @@ class Addproduct(db.Model):
     image_2 = db.Column(db.String(150), nullable=False, default='image.jpg')
     image_3 = db.Column(db.String(150), nullable=False, default='image.jpg')
 
+         
     #create function to return a string
     def __repr__(self):
         return '<Addproduct %r>' % self.name
+    
 
 class Brand(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -3,6 +3,7 @@ from flask_login import login_required, current_user, logout_user, login_user
 from shop import db, app, photos, search, bcrypt, login_manager
 from .forms import CustomerRegisterForm, CustomerLoginForm
 from .model import Register, CustomerOrder
+from shop.products.models import Addproduct
 import secrets, os
 import stripe
 import pdfkit

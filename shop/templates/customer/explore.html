@@ -14,7 +14,7 @@
 <div class="container mt-3">
     <div class="text-center">
     <h1>Welcome to the <span style="color: #ff00aa">Mochiverse!</span></h1>
-    <h5 style="color: #5d5d5d;">Get a feel of our shop</h5>
+    <h5 style="color: #5d5d5d;">-Get a feel of our shop-</h5>
     </div>
     <hr>
 
@@ -42,15 +42,158 @@
     <div class="row mt-5">
         <div class="text-center">
             <h3>Fast selling products</h3>
-            <h5 style="color: #5d5d5d;">What are you waiting for? Shop Now!</h5>
+            <h5 style="color: #5d5d5d;">-What are you waiting for? Shop Now!-</h5>
+            <section class="explore_cards mt-4">
+                <article class="explore_card card--1">
+                  <div class="card__img"></div>
+                  <a href="{{url_for('products')}}" class="card_link">
+                     <div class="card__img--hover"></div>
+                   </a>
+                  <div class="card__info">
+                    <span class="card__category">CAT TOYS</span>
+                    <h3 class="card__title">chewable cat toys</h3>
+                    <span class="card__by">going at only<br> <a href="#" class="card__price" title="author">Ksh. 400</a></span>
+                </div>
+                </article>
+
+                <article class="explore_card card--2">
+                    <div class="card__img"></div>
+                    <a href="{{url_for('products')}}" class="card_link">
+                       <div class="card__img--hover"></div>
+                     </a>
+                    <div class="card__info">
+                      <span class="card__category">NIGHT LIGHT</span>
+                      <h3 class="card__title">silicone lamp</h3>
+                      <span class="card__by">going at only<br> <a href="#" class="card__price" title="author">Ksh. 2000</a></span>
+                    </div>
+                  </article>
+
+                  <article class="explore_card card--3">
+                    <div class="card__img"></div>
+                    <a href="{{url_for('products')}}" class="card_link">
+                       <div class="card__img--hover"></div>
+                     </a>
+                    <div class="card__info">
+                      <span class="card__category">GEL PENS</span>
+                      <h3 class="card__title">generic gel pens</h3>
+                      <span class="card__by">going at only<br> <a href="#" class="card__price" title="author">Ksh. 200</a></span>
+                    </div>
+                  </article>
+
+                  <article class="explore_card card--4">
+                    <div class="card__img"></div>
+                    <a href="{{url_for('products')}}" class="card_link">
+                       <div class="card__img--hover"></div>
+                     </a>
+                    <div class="card__info">
+                      <span class="card__category">CAT BEDS</span>
+                      <h3 class="card__title">comfy cat beds</h3>
+                      <span class="card__by">going at only<br> <a href="#" class="card__price" title="author">Ksh. 1000</a></span>
+                    </div>
+                  </article>
+                          
+                  </section>
         </div>
-        <div class="text-center mt-4">
+        <div class="text-center mt-5">
             <h3>Reviews</h3>
-            <h5 style="color: #5d5d5d;">See what our customers are saying about us</h5>
+            <h5 style="color: #5d5d5d;">-See what our customers are saying about us-</h5>
         </div>
     </div>
+    <br><br><br><br><br><br><br>
 </div>  
 </div>
+<footer class="footer-section">
+    <div class="container">
+        <div class="footer-cta pt-5 pb-5">
+            <div class="row">
+                <div class="col-xl-4 col-md-4 mb-30">
+                    <div class="single-cta">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="cta-text">
+                            <h4>Find us</h4>
+                            <span>0000 Nairobi, Kenya</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4 mb-30">
+                    <div class="single-cta">
+                        <i class="fas fa-phone"></i>
+                        <div class="cta-text">
+                            <h4>Call us</h4>
+                            <span>0712345678</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4 mb-30">
+                    <div class="single-cta">
+                        <i class="far fa-envelope-open"></i>
+                        <div class="cta-text">
+                            <h4>Mail us</h4>
+                            <span>mochimochi@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-content pt-5 pb-5">
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 mb-50">
+                    <div class="footer-widget">
+                        <div class="footer-logo">
+                            <a href="index.html"><img src="data:image/jpeg;base64,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" class="img-fluid" alt="logo"></a>
+                        </div>
+                        <div class="footer-text">
+                            <p>Lorem ipsum dolor sit amet, consec tetur adipisicing elit, sed do eiusmod tempor incididuntut consec tetur adipisicing
+                            elit,Lorem ipsum dolor sit amet.</p>
+                        </div>
+                   
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+                    <div class="footer-widget">
+                        <div class="footer-widget-heading">
+                            <h3>Useful Links</h3>
+                        </div>
+                        <ul>
+                            <li><a href="{{url_for('home')}}">Home</a></li>
+                            <li><a href="{{url_for('about')}}">About Us</a></li>
+                            <li><a href="{{url_for('products')}}">Shop</a></li>
+                            <li><a href="{{url_for('contact')}}">Contact Us</a></li>
+                            <li><a href="#">Our Team</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                    <div class="footer-widget">
+                        <div class="footer-widget-heading">
+                            <h3>Subscribe</h3>
+                        </div>
+                        <div class="footer-text mb-25">
+                            <p>Don’t miss out to our recent sales. Subscribe now! :)</p>
+                        </div>
+                        <div class="subscribe-form">
+                            <form action="#">
+                                <input type="text" placeholder="Email Address">
+                                <button>Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="text-center">
+                    <div class="copyright-text">
+                        <p>Copyright &copy; 2023, All Right Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
 
 <script>
