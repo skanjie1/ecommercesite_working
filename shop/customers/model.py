@@ -44,6 +44,7 @@ class JsonEncodedDict(db.TypeDecorator):
             return json.loads(value)
 
 class CustomerOrder(db.Model):
+    __searchbale__ = ['invoice','status']
     id = db.Column(db.Integer, primary_key=True)
     invoice = db.Column(db.String(20), unique=True, nullable=False)
     status = db.Column(db.String(20), default='Pending', nullable=False)
@@ -57,6 +58,7 @@ class CustomerOrder(db.Model):
 
     
 class Review(db.Model):
+    __searchbale__ = ['name','content']
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(120), nullable=False)

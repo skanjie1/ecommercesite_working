@@ -225,23 +225,30 @@ def get_pdf(invoice):
             return response
     return request(url_for('home'))
 
-# @app.route('/review', methods=['GET', 'POST'])
-# def review():
-#     if request.method == 'POST':
-#         name = request.form.get('name')
-#         email = request.form.get('email')
-#         content = request.form.get('content')
 
-#         if name and email and content:
-#             review = Review(name=name, email=email, content=content)
-#             db.session.add(review)
-#             db.session.commit()
-#             flash('Review submitted successfully!', 'success')
-#         else:
-#             flash('Please fill all the fields.', 'danger')
+@app.route('/result/reviews')
+def review_result():
+    searchword = request.args.get('q')
+    reviews_query = Review.query.msearch(searchword, fields=['name','content'], limit=4)
+    reviews = reviews_query.all()
 
-#     return render_template('customer/thanks.html')
+    if len(reviews) == 0:
+        flash('Review not found', 'danger')
+    return render_template('admin/reviewresult.html', reviews=reviews)
+ 
 
+@app.route('/result/orders')
+def order_result():
+    searchword = request.args.get('q')
+    orders_query = CustomerOrder.query.msearch(searchword, fields=['invoice','status'], limit=15)
+    orders = orders_query.all()
+
+    if len(orders) == 0:
+        flash('Order not found', 'danger')
+    return render_template('admin/orderresult.html', orders=orders)
+ 
+
+  
   
 
   
