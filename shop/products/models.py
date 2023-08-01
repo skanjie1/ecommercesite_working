@@ -38,6 +38,7 @@ class Addproduct(db.Model):
     
 
 class Brand(db.Model):
+    __searchbale__ = ['name']
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), nullable=False, unique=True)
     
@@ -46,6 +47,7 @@ class Brand(db.Model):
         return '<Brand %r>' % self.name
     
 class Category(db.Model):
+    __searchbale__ = ['name']
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), nullable=False, unique=True)
     

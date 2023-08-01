@@ -26,7 +26,6 @@
 
 
 <div class="container mt-4">
-
     {% include '_messages.html' %}
     <table class="table table-sm table-condensed table-striped table-hover">
         <thead>
@@ -40,34 +39,34 @@
             <div class="container">
                 <div class="text-center h5 mt-4">Manage brands</div>
                 <div class="dashboard-button">
-                <a href="{{url_for('dashboard')}}", class="btn btn-sm btn-outline-secondary" style="margin-left: 0px">Back to dashboard</a>
-                <form action="{{url_for('brand_result')}}" class="form-inline my-2 my-lg-0">
-                    <input class="dashboard-search-form search-form form-control mr-sn-2" type="search" name="q" placeholder="Search Brand" aria-label="Search">
-                    <button class="dashboard-search-button search-button btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>
-            <hr>
-            {% for brand in brands%}
-            <tr>
-                <td>{{loop.index}}</td>
-                <td>{{brand.name}}</td>
-                <td><a href="{{url_for('updatebrand', id=brand.id)}}", class="btn btn-sm btn-outline-info">Edit</a></td>
-                <td>
+                    <a href="{{url_for('brands')}}", class="btn btn-sm btn-outline-secondary" style="margin-left: 0px">manage brands</a>
+                    <form action="{{url_for('brand_result')}}" class="form-inline my-2 my-lg-0">
+                        <input class="dashboard-search-form search-form form-control mr-sn-2" type="search" name="q" placeholder="Search Brand" aria-label="Search">
+                        <button class="dashboard-search-button search-button btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+                <hr>
+                {% for brand in brands%}
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{brand.name}}</td>
+                    <td><a href="{{url_for('updatebrand', id=brand.id)}}", class="btn btn-sm btn-outline-info">Edit</a></td>
+                    <td>
                     <!-- <a href="", class="btn btn-sm btn-outline-danger">Delete</a>-->
                     <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-{{brand.id}}">
                         Delete
                     </button>
                 </td>
             </tr>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal-{{brand.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">{{brand.name}} confirm delete</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal-{{brand.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">{{brand.name}} confirm delete</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
         <div class="modal-body">
           <span>
             Are you sure you want to delete {{brand.name}}?
@@ -90,7 +89,7 @@
             <div class="container">
                 <div class="text-center h5 mt-4">Manage categories</div>
                 <div class="dashboard-button">
-                <a href="{{url_for('dashboard')}}", class="btn btn-sm btn-outline-secondary" style="margin-left: 0px">Back to dashboard</a>
+                <a href="{{url_for('category')}}" class="btn btn-sm btn-outline-secondary" style="margin-left: 0px">manage categories</a>
                 <form action="{{url_for('cat_result')}}" class="form-inline my-2 my-lg-0">
                     <input class="dashboard-search-form search-form form-control mr-sn-2" type="search" name="q" placeholder="Search Categories" aria-label="Search">
                     <button class="dashboard-search-button search-button btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
@@ -109,7 +108,7 @@
                 </td>
             </tr>
 
-              <!-- Modal -->
+             
   <div class="modal fade" id="exampleModal-{{category.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -133,9 +132,10 @@
     </div>
   </div>
   
-            {% endfor %}
-            {% endif %}
+            {% endfor %} 
+
         </tbody>
+        {% endif %}
     </table>
 </div>            
     

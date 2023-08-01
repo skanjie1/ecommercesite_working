@@ -73,14 +73,14 @@ def getCart():
     
     return render_template('products/carts.html', grandtotal=grandtotal)
 
-@app.route('/empty')
-def empty_cart():
-    try:
-        session.clear()
-        # flash('Cart cleared successfully!','success')
-        return redirect(url_for('home'))
-    except Exception as e:
-        print(e)
+# @app.route('/empty')
+# def empty_cart():
+#     try:
+#         session.clear()
+#         # flash('Cart cleared successfully!','success')
+#         return redirect(url_for('home'))
+#     except Exception as e:
+#         print(e)
 
 @app.route('/updatecart/<int:id>', methods=['POST'])
 def updatecart(id):
@@ -117,10 +117,27 @@ def deleteitem(id):
         print(e)
         return redirect(url_for('getCart'))
 
-# @app.route('/clearcart')
-# def clearcart():
-#     try:
-#         session.pop('Shoppingcart', None)
-#         return redirect(url_for('products'))
-#     except Exception as e:
-#         print(e)
+@app.route('/clearcart')
+def clearcart():
+    try:
+        session.pop('Shoppingcart', None)
+        flash('Cart cleared succesfully!','success')
+        return redirect(url_for('products'))
+    except Exception as e:
+        print(e)
+        
+@app.route('/cartresult')
+def cartresult():
+    searchword = request.args.get('q')
+    search_results = []
+
+    if 'Shoppingcart' in session:
+        for key, product in session['Shoppingcart'].items():
+            product_name = product['name'].lower()
+            if searchword.lower() in product_name:
+                product['id'] = key
+                search_results.append(product)
+
+    if len(search_results) == 0:
+        flash('Item not found', 'danger')
+    return render_template('products/cartresult.html', products=search_results)

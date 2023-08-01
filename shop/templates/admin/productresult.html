@@ -18,19 +18,18 @@
     </header>
 </div>
 
-{% include '_messages.html' %}
 
 <div class="text-center h1">Welcome admin</div>
 
 <div class="container">
     <div class="text-center h5 mt-4">Manage products</div>
     <div class="dashboard-button">
-    <a href="{{url_for('dashboard')}}", class="btn btn-sm btn-outline-secondary" style="margin-left: 0px">Back to dashboard</a>
-    <form action="{{url_for('product_result')}}" class="form-inline my-2 my-lg-0">
-        <input class="dashboard-search-form search-form form-control mr-sn-2" type="search" placeholder="Search Product" name="q" aria-label="Search">
-        <button class="dashboard-search-button search-button btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-    </form>
-</div>
+        <a href="{{url_for('adminpage')}}", class="btn btn-sm btn-outline-secondary" style="margin-left: 0px">manage products</a>
+        <form action="{{url_for('product_result')}}" class="form-inline my-2 my-lg-0">
+            <input class="dashboard-search-form search-form form-control mr-sn-2" type="search" name="q" placeholder="Search Product" aria-label="Search">
+            <button class="dashboard-search-button search-button btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
 </div>
 
 
@@ -50,6 +49,7 @@
             <th>Edit</th>
             <th>Delete</th>
         </thead>
+        {% include '_messages.html' %}
         <tbody>
             {% for product in products%}
             <tr>

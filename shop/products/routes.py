@@ -42,20 +42,7 @@ def result():
         flash('Item not found', 'danger')
     return render_template('products/result.html', products=products, brands=brands(), categories=categories())
 
-@app.route('/cartresult')
-def cartresult():    
-    searchword = request.args.get('q')
-    search_results = []
-    
-    if 'Shoppingcart' in session:
-        for key, product in session['Shoppingcart'].items():
-            product_name = product['name'].lower()
-            if searchword.lower() in product_name:
-                search_results.append(product)
-    
-    if len(search_results) == 0:
-        flash('Item not found', 'danger')
-    return render_template('products/cartresult.html', products=search_results)
+
 
 @app.route('/brand/<int:id>')
 def get_brand(id):
@@ -259,4 +246,44 @@ def deleteproduct(id):
     flash(f'Product {product.name} cant be deleted','danger')
     
     return redirect(url_for('adminpage'))
+
+@app.route('/result/products')
+def product_result():
+    searchword = request.args.get('q')
+    products_query = Addproduct.query.msearch(searchword, fields=['name','desc'], limit=5)
+    products = products_query.all()
+
+    if len(products) == 0:
+        flash('Item not found', 'danger')
+    return render_template('admin/productresult.html', products=products)
+        
+        
+@app.route('/result/brands')
+def brand_result():
+    searchword = request.args.get('q')
+    brands_query = Brand.query.msearch(searchword, fields=['name'], limit=10)
+    brands = brands_query.all()
+
+    if len(brands) == 0:
+        flash('Item not found', 'danger')
+        # brands = Brand.query.join(Addproduct, (Brand.id == Addproduct.brand_id)).all()
+        # categories = Category.query.join(Addproduct, (Category.id == Addproduct.category_id)).all()
+        # return render_template('admin/brand.html', brands=brands, categories=categories)
+
+    return render_template('admin/brandresult.html', brands=brands)
+        
+        
+@app.route('/result/categories')
+def cat_result():
+    searchword = request.args.get('q')
+    cat_query = Category.query.msearch(searchword, fields=['name'], limit=10)
+    categories = cat_query.all()
+
+    if len(categories) == 0:
+        flash('Item not found', 'danger')
+        # brands = Brand.query.join(Addproduct, (Brand.id == Addproduct.brand_id)).all()
+        # categories = Category.query.join(Addproduct, (Category.id == Addproduct.category_id)).all()
+        # return render_template('admin/brand.html', brands=brands, categories=categories)
+
+    return render_template('admin/brandresult.html', categories=categories)
         
