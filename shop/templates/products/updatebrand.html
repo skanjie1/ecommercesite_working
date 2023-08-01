@@ -23,71 +23,8 @@
 <div class="text-center h1">Welcome admin</div>
 
 
-<div class="area"></div>
-    <nav class="main-menu">
-    <ul>
-        <li>
-            <a href="{{url_for('dashboard')}}">
-            <i class="fa fa-home fa-2x"></i>
-            <span class="nav-text">
-                Admin Dashboard
-            </span>
-            </a>                               
-        </li>
+{% include 'sidebar.html' %}
 
-        <li>
-            <a href="{{url_for('addbrand')}}">
-            <i class="fa fa-home fa-2x"></i>
-            <span class="nav-text">
-                Add Brand
-            </span>
-            </a>                               
-        </li>
-
-        <li>
-            <a href="{{url_for('addcategory')}}">
-            <i class="fa fa-home fa-2x"></i>
-            <span class="nav-text">
-                Add Category
-            </span>
-            </a>                               
-        </li>
-
-        <li>
-            <a href="{{url_for('addproduct')}}">
-            <i class="fa fa-home fa-2x"></i>
-            <span class="nav-text">
-                Add Products
-            </span>
-            </a>                               
-        </li>
-        <li>
-            <a href="{{url_for('brands')}}">
-            <i class="fa fa-home fa-2x"></i>
-            <span class="nav-text">
-                View Brands
-            </span>
-            </a>                               
-        </li>
-        <li>
-            <a href="{{url_for('category')}}">
-            <i class="fa fa-home fa-2x"></i>
-            <span class="nav-text">
-                View Categories
-            </span>
-            </a>                               
-        </li>
-        <li>
-            <a href="{{url_for('adminpage')}}">
-            <i class="fa fa-home fa-2x"></i>
-            <span class="nav-text">
-                View Products
-            </span>
-            </a>                               
-        </li>
-    </ul>
-              
-    </nav>
 
 <div class="container">
     <div class="row">

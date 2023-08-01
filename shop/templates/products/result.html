@@ -5,7 +5,7 @@
 
 <div class="container">
     <h1 class="text-center mt-3">Welcome esteemed shopper!</h1>
-    <h5 class="text-center sales mt-3">Shop Now! Sales Ongoing</h5>
+    <h5 class="text-center sales mt-3">-Shop Now! Sales Ongoing-</h5>
     <hr>
     <div class="dropdown">
         <a class="dropdown-button btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -35,7 +35,7 @@
     <div class="row">
         {% for product in products %}
         <div class="col-md-3 mt-3">
-            <div class="card"><a href="{{url_for('single_page', id=product.id)}}" style="display: block; color:black;">
+            <div class=" products_card card"><a href="{{url_for('single_page', id=product.id)}}" style="display: block; color:black;">
                 <img src="{{url_for('static', filename='images/' + product.image_1)}}" alt="{{product.name}}" class="card-img-top" height="190">
                 <div class="card-body">
                     <h6 class="text-center">{{product.name}}</h6>
@@ -44,7 +44,7 @@
                     <p class="text-center mt-2 text-success">- Ksh.{{product.discount}}</p>
                     {% endif %}
                 </div>
-                <div class="card-footer">
+             <!--   <div class="card-footer">
                     <form action="{{url_for('AddCart')}}" method="POST">
                         <a href="{{url_for('single_page', id=product.id)}}" class="float-left btn btn-sm btn-outline-secondary">Details</a>
                         <input type="hidden" name="product_id" value="{{product.id}}">
@@ -60,7 +60,7 @@
                             {% endfor %}
                         </select>
                     </form>
-                </div>
+                </div>  -->
             </a>
             </div>
         </div>

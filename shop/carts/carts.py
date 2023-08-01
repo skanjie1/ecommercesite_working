@@ -73,13 +73,14 @@ def getCart():
     
     return render_template('products/carts.html', grandtotal=grandtotal)
 
-# @app.route('/empty')
-# def empty_cart():
-#     try:
-#         session.clear()
-#         return redirect(url_for('home'))
-#     except Exception as e:
-#         print(e)
+@app.route('/empty')
+def empty_cart():
+    try:
+        session.clear()
+        # flash('Cart cleared successfully!','success')
+        return redirect(url_for('home'))
+    except Exception as e:
+        print(e)
 
 @app.route('/updatecart/<int:id>', methods=['POST'])
 def updatecart(id):

@@ -8,9 +8,9 @@
     <hr>
     <div class="container">
         <div class="dashboard-button" style="margin-bottom: 10px; margin-top: 5px;">
-        <a href="{{url_for('products')}}", class="btn btn-sm btn-info" style="margin-left: 0px">Continue shopping?</a>
+        <a href="{{url_for('empty_cart')}}", class="btn btn-sm " style="margin-left: 0px"><img src="https://cdn-icons-png.flaticon.com/128/3742/3742081.png" style="width: 39px; height: 39px;"></a>
         <form class="form-inline my-2 my-lg-0" action="{{url_for('cartresult')}}">
-            <input class="dashboard-search-form search-form form-control mr-sn-2" type="search" placeholder="Search Product" aria-label="Search" style="margin-left: 710px;" name="q">
+            <input class="dashboard-search-form search-form form-control mr-sn-2" type="search" placeholder="Search Product" aria-label="Search" style="margin-left: 800px;" name="q">
             <button class="dashboard-search-button search-button btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
@@ -46,7 +46,7 @@
                         <td>
                             {% set colors = product.colors.split(',') %}
                         
-                            <select name="color" id="color">
+                            <select class="custom-select" name="color" id="color">
                                 <option value="{{product.color}}" style="display: none;">{{product.color}}</option>
                                 {% for colors in colors %}
                                 {% set col = colors.split(':') %}

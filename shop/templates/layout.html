@@ -24,12 +24,12 @@
               <a class="nav=link disabled" href="{{url_for('getCart')}}" tabindex="-1">
                 <div class="cart-container">
                 <div class="icon-cart mt-4" style="float: left">
-                  <div class="cart-line-1" style="background-color: #C5BFB6"></div>
-                  <div class="cart-line-2" style="background-color: #C5BFB6"></div>
-                  <div class="cart-line-3" style="background-color: #C5BFB6"></div>
-                  <div class="cart-wheel" style="background-color: #C5BFB6"></div>
+                  <div class="cart-line-1" style="background-color: black"></div>
+                  <div class="cart-line-2" style="background-color: black"></div>
+                  <div class="cart-line-3" style="background-color: black"></div>
+                  <div class="cart-wheel" style="background-color: black"></div>
                 </div>
-                <span class="cart-items-count">({{session['Shoppingcart']|length}})</span>
+                <b>    <span style="color: #ff00aa;" class="cart-items-count">({{session['Shoppingcart']|length}})</span></b>
               </div>
               </a>
           </li>
