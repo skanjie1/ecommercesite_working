@@ -853,8 +853,8 @@ body {
 .slide-text{
   /* color: #ff00aa; */
   /* position: absolute; */
-  bottom: 20px; /* Adjust the distance from the bottom as needed */
-  left: 20px; /* Adjust the distance from the left as needed */
+  bottom: 20px; 
+  left: 20px; 
   background-color: rgba(255, 255, 255, 0.8); 
   padding: 10px;
   font-size: 18px;
