@@ -1,4 +1,4 @@
-from flask import redirect, render_template, url_for,flash, request, session, current_app
+from flask import redirect, render_template, url_for,flash, request, session, current_app, jsonify
 from shop import db, app, photos, search
 from flask_login import login_required
 from .models import Brand, Category, Addproduct
@@ -26,6 +26,25 @@ def products():
     categories = Category.query.join(Addproduct, (Category.id == Addproduct.category_id)).all()
 
     return render_template('products/index.html', products=products, brands=brands, categories=categories)
+
+# @app.route('/load_more_products', methods=['POST'])
+# def load_more_products():
+#     page = request.json.get('page', 1)
+#     per_page = 8
+#     products = Addproduct.query.filter(Addproduct.stock > 0).paginate(page=page, per_page=per_page)
+
+#     product_data = []
+#     for product in products.items:
+#         product_data.append({
+#             'id': product.id,
+#             'name': product.name,
+#             'price': product.price,
+#             'discount': product.discount,
+#             'image_1': product.image_1,
+#         })
+
+#     return jsonify({'products': product_data, 'has_next': products.has_next})
+
 
 @app.route('/product/<int:id>')
 def single_page(id):
@@ -256,8 +275,8 @@ def product_result():
     if len(products) == 0:
         flash('Item not found', 'danger')
     return render_template('admin/productresult.html', products=products)
-        
-        
+
+      
 @app.route('/result/brands')
 def brand_result():
     searchword = request.args.get('q')
@@ -286,4 +305,4 @@ def cat_result():
         # return render_template('admin/brand.html', brands=brands, categories=categories)
 
     return render_template('admin/brandresult.html', categories=categories)
-        
+

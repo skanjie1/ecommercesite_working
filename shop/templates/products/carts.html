@@ -27,35 +27,23 @@
                 <th>Quantity</th>
                 <th>Discount </th>
                 <th>Total </th>
-                <th>Update</th>
                 <th>Remove</th>
             </thead>
             <tbody>
                 {% for key, product in session['Shoppingcart'].items() %}
                 <tr> 
                     <td>{{loop.index}}</td>
-                    <td> <a href="{{url_for('single_page', id=key)}}">
+                    <td> <a href="{{url_for('cartupdate', id=key)}}">
                         <img src="{{url_for('static',filename='images/'+product.image)}}" alt="{{product.name}}" width="130" height="130">
                     </a>
                     </td>
-                    <td><a href="{{url_for('single_page', id=key)}}" style="color: black;">
+                    <td><a href="{{url_for('cartupdate', id=key)}}" style="color: black;">
                        {{ product.name }}
                     </a>
                     </td>
-                    <form action="{{url_for('updatecart', id=key)}}" method="POST">
-                        <td>
-                            {% set colors = product.colors.split(',') %}
-                        
-                            <select class="custom-select" name="color" id="color">
-                                <option value="{{product.color}}" style="display: none;">{{product.color}}</option>
-                                {% for colors in colors %}
-                                {% set col = colors.split(':') %}
-                                <option value="{{col[0]}}">{{col[0]}}</option>
-                                {% endfor %}
-                            </select>
-                        </td> 
+                    <td>{{product.color}}</td> 
                         <td>Ksh.{{product.price}}</td>
-                        <td><input type="number" name="quantity" class="quantity-number" min="1" max="{{product.stock}}" value="{{product.quantity}}"></td>
+                        <td>{{product.quantity}}</td>
                         {% if product.discount > 0 %}
                         <td>Ksh.{{product.discount}}</td>
                         {% else %}
@@ -63,38 +51,14 @@
                         {%endif%}
                         {% set total = product.quantity|int * (product.price|float - product.discount|float) %}
                         <td>Ksh.{{ "%0.2f"|format(total) }}</td>
-                        <td><button type="submit" class="btn btn-sm btn-outline-info">Update</button></td>
-                    </form>
+                     <!--   <td><button type="submit" class="btn btn-sm btn-outline-info">Update</button></td> -->
+                    
                     <td>
-                         <a href="{{url_for('deleteitem', id=key)}}" class="btn btn-sm btn-outline-danger">Remove</a> 
-                       <!-- <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-{{id}}">
-                            Remove
-                        </button> -->
+                         <a href="{{url_for('deleteitem', id=key)}}" class="btn" ><img src="https://img.icons8.com/?size=512&id=99961&format=png" style="height: 20px; width=20px;"></a> 
+                  
                     </td>
                 </tr>
-                 <!-- Modal -->
-  <!-- <div class="modal fade" id="exampleModal-{{product.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">{{product.name}} confirm remove</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <span>
-            Are you sure you want to remove {{product.name}} from cart?
-          </span>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-warning" data-bs-dismiss="modal">Cancel</button>
-          <form action="{{url_for('deleteitem', id=key)}}" method="POST">
 
-              <button type="submit" class="btn btn-sm btn-danger">Remove</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div> -->
                 {% endfor %}
              
             </tbody>

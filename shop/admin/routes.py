@@ -20,6 +20,10 @@ def contact():
 def about():
     return render_template('about.html', title='About Us')
 
+@app.route('/team')
+def team():
+    return render_template('team.html')
+
 @app.route('/dashboard')
 # @login_required
 def dashboard():

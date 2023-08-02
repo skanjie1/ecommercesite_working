@@ -1190,3 +1190,90 @@ color: #878787;
   border-top-right-radius: 12px;
   top: 0;
 } */
+
+/* team */
+
+#team{
+  display:flex;
+  flex-wrap: wrap;
+  flex-grow:3;
+}
+.teamcard {
+  width:33%;
+  /* margin-right: 20px; */
+  min-width: 250px;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  margin:0 0.5% 1% 0;
+  display:inline-block
+}
+.teamcard:nth-of-type(3n){
+  margin-right:0;
+}
+.teamcard img {
+  width: 100%;
+  /* margin-right: 100px; */
+  min-height:100%;
+  transition:all 0.9s
+}
+.teamcard:hover img{
+ transform:scale(1.2,1.2)
+}
+.data {
+  position: absolute;
+  bottom: 5%;
+  background: #fff;
+  text-align:center;
+  width: 90%;
+  height: 80px;
+  overflow: hidden;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  padding: 10px 5%;
+  box-sizing: border-box;
+  opacity: 0.8;
+  transition: all 0.4s
+}
+
+.teamcard:hover .data {
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  opacity: 0.9;
+  padding:90px 10%
+}
+
+.data h2 {
+  margin: 0 0 5px 0;
+  transition:color 0.4s
+}
+
+.data p {
+  opacity: 0;
+  text-align:justify;
+  transition: all 0.2s
+}
+
+.teamcard:hover .data p,.teamcard:hover .data a {
+  opacity: 1
+}
+
+.data a{
+  color:#333;
+  text-decoration:none;
+  padding:20px;
+  opacity:0
+}
+.data a:hover,.teamcard:hover h2{
+  color: #ff00aa;
+}
+
+@media (max-width:799px){
+  .teamcard {width:100%;margin-right:0}
+}
+
+
+
+

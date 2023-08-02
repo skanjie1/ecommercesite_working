@@ -73,34 +73,50 @@ def getCart():
     
     return render_template('products/carts.html', grandtotal=grandtotal)
 
-# @app.route('/empty')
-# def empty_cart():
-#     try:
-#         session.clear()
-#         # flash('Cart cleared successfully!','success')
-#         return redirect(url_for('home'))
-#     except Exception as e:
-#         print(e)
 
-@app.route('/updatecart/<int:id>', methods=['POST'])
+@app.route('/updatecart/<int:id>', methods=['GET', 'POST'])
 def updatecart(id):
-    if 'Shoppingcart' not in session and len(session('Shoppingcart')) <= 0:
+    if 'Shoppingcart' not in session and len(session.get('Shoppingcart', {})) <= 0:
         return redirect(url_for('products'))
-    
+
+    cart = session['Shoppingcart']
+    product = cart.get(str(id))  
+    if not product:
+        flash('Product not found in cart', 'danger')
+        return redirect(url_for('getCart'))
+
     if request.method == "POST":
         quantity = request.form.get('quantity')
         color = request.form.get('color')
+
         try:
             session.modified = True
-            for key, item in session['Shoppingcart'].items():
+            for key, item in cart.items():
                 if int(key) == id:
                     item['quantity'] = quantity
-                    item['color'] = color
-                    flash('Product updated successfully!','success')
+                    item['color'] = color  
+                    flash('Product updated successfully!', 'success')
                     return redirect(url_for('getCart'))
         except Exception as e:
             print(e)
+            flash('Error updating product', 'danger')
             return redirect(url_for('getCart'))
+
+    return render_template('products/updatecart.html', product=product)
+
+
+@app.route('/cartupdate/<int:id>', methods=['GET', 'POST'])
+def cartupdate(id):
+    if 'Shoppingcart' not in session and len(session.get('Shoppingcart', {})) <= 0:
+        return redirect(url_for('products'))
+
+    product = Addproduct.query.filter_by(id=id).first()
+    if not product:
+        flash('Product not found', 'danger')
+        return redirect(url_for('getCart'))
+
+    return render_template('products/updatecart.html', product=product)
+
 
 @app.route('/deleteitem/<int:id>')
 def deleteitem(id):
