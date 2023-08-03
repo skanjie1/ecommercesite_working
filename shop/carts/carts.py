@@ -87,7 +87,7 @@ def updatecart(id):
 
     if request.method == "POST":
         quantity = request.form.get('quantity')
-        color = request.form.get('color')
+        color = request.form.get('colors')
 
         try:
             session.modified = True

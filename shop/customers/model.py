@@ -1,6 +1,7 @@
 from shop import db, app, login_manager
 from datetime import datetime
 from flask_login import UserMixin
+# from products.models import Addproduct
 import json
 
 @login_manager.user_loader
@@ -55,8 +56,8 @@ class CustomerOrder(db.Model):
 
     def __repr__(self):
         return '<CustomerOrder %r>' % self.invoice
-
     
+
 class Review(db.Model):
     __searchbale__ = ['name','content']
     id = db.Column(db.Integer, primary_key=True)

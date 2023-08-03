@@ -6,6 +6,8 @@ from flask_msearch import Search
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from textblob import TextBlob
+# from shop.utils import has_purchased_product
+# from shop import db
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -36,10 +38,21 @@ login_manager.needs_refresh_message_category='danger'
 login_manager.login_message_category ='danger'
 login_manager.login_message = "Hello! Please login first"
 
+from shop.customers.model import CustomerOrder
 
+def has_purchased_product(user_id, product_id):
+    order = CustomerOrder.query.filter_by(customer_id=user_id).first()
+    if order:
+        orders = order.orders
+        if str(product_id) in orders:
+            return True
+    return False
+
+app.jinja_env.globals['has_purchased_product'] = has_purchased_product
 
 
 from shop.admin import routes
 from shop.products import routes
 from shop.carts import carts
 from shop.customers import routes
+

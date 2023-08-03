@@ -35,7 +35,20 @@ class Addproduct(db.Model):
     #create function to return a string
     def __repr__(self):
         return '<Addproduct %r>' % self.name
-    
+
+class ProductReview(db.Model):
+    __searchbale__ = ['content', 'id']
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text)
+    rating = db.Column(db.Integer)
+    product_id = db.Column(db.Integer, db.ForeignKey('addproduct.id'), nullable=False)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+
+    product = db.relationship('Addproduct', backref='reviews')
+
+    def __repr__(self):
+        return '<ProductReview %r>' % self.id
+      
 
 class Brand(db.Model):
     __searchbale__ = ['name']

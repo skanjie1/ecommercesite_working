@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<div class="landing-page">
+    <header>
+        <div class="container">
+            <a href="{{url_for('home')}}" class="logo">MOCHI <b>MOCHI</b></a>
+            <ul class="links">
+                <li><a href="{{url_for('home')}}">Home</a></li>
+                <li><a href="{{url_for('products')}}">Products</a></li>
+                <li><a href="{{url_for('contact')}}">Contact Us</a></li>
+                <li><a href="{{url_for('about')}}">About Us</a></li>
+            </ul>
+            <a href="{{ url_for('login') }}" class="logout-link">Logout</a>           
+        </div>
+    </header>
+</div>
+
+{% include 'sidebar.html' %}
+
+    <div class="text-center h1">Welcome admin</div>
+    <div class="container">
+    {% include '_messages.html' %}
+
+    <div class="text-center h5 mt-4">-Customer Reviews-</div>
+    <div class="dashboard-button">
+    <a href="{{url_for('dashboard')}}", class="btn btn-sm btn-outline-secondary" style="margin-left: 0px">Back to dashboard</a>
+    <form action="{{url_for('prod_result')}}" class="form-inline my-2 my-lg-0">
+        <input class="dashboard-search-form search-form form-control mr-sn-2" type="search" name="q" placeholder="Search Review" aria-label="Search">
+        <button class="dashboard-search-button search-button btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</div>
+</div>
+
+<div class="container">
+    <hr>
+    <div class="row">
+    {% for review in reviews.items %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Product Id: {{ review.product_id }}</h5>
+            <p class="card-text">Rating: {{ review.rating }}⭐ </p>
+            <p class="card-text">{{ review.content }}</p>
+            {% set sentiment_score = review.content | sentiment_score %}
+            {% if sentiment_score > 0 %}
+                <p class="card-text text-success">Happy Customer🥰</p>  
+            {% elif sentiment_score < 0 %}
+                <p class="card-text text-danger">Not Satisfied😡</p> 
+            {% else %}
+                <p class="card-text text-warning">Meh It's Ok🙂</p> 
+            {% endif %}
+            <p class="card-text"><small class="text-muted">{{ review.pub_date }}</small></p>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="row">
+        <div class="col text-center">
+        {% if reviews.has_prev %}
+        <a href="{{url_for('product_reviews', page=reviews.prev_num)}}" class="btn btn-sm btn-outline-secondary mt-3">&laquo;</a>
+        {% endif %}
+        {% for page_num in reviews.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=1) %}
+        {% if page_num %}
+        {% if reviews.page == page_num %}
+        <a href="{{url_for('product_reviews', page=page_num)}}" class="btn btn-sm btn-info mt-3">{{page_num}}</a>
+        {% else %}
+        <a href="{{url_for('product_reviews', page=page_num)}}" class="btn btn-sm btn-outline-secondary mt-3">{{page_num}}</a>
+        {% endif %}
+        {% else %}
+        ...
+        {% endif %}
+        {% endfor%}
+        {% if reviews.has_next %}
+        <a href="{{url_for('product_reviews', page=reviews.next_num)}}" class="btn btn-sm btn-outline-secondary mt-3">&raquo;</a>
+        {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -156,6 +156,8 @@ def orders(invoice):
     return render_template('customer/order.html', invoice=invoice, grandtotal=grandtotal, customer=customer, orders=orders)
 
 
+
+
 @app.route('/admin/orders')
 def admin_orders():
     page = request.args.get('page', 1, type=int)
@@ -226,8 +228,6 @@ def order_result():
     return render_template('admin/orderresult.html', orders=orders)
  
 
-  
-  
 
   
  

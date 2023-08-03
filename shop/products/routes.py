@@ -1,8 +1,10 @@
 from flask import redirect, render_template, url_for,flash, request, session, current_app, jsonify
 from shop import db, app, photos, search
-from flask_login import login_required
-from .models import Brand, Category, Addproduct
-from .forms import Addproducts
+from flask_login import login_required, current_user
+from .models import Brand, Category, Addproduct, ProductReview
+from .forms import Addproducts, ProductReviewForm
+from shop.utils import has_purchased_product
+# from shop.customers.model import CustomerOrder
 import secrets, os
 
 # @app.route('/home')
@@ -28,10 +30,21 @@ def products():
 
     return render_template('products/index.html', products=products, brands=brands, categories=categories)
 
-@app.route('/product/<int:id>')
+
+@app.route('/product/<int:id>', methods=['GET', 'POST'])
 def single_page(id):
     product = Addproduct.query.get_or_404(id)
-    return render_template('products/single_page.html', product=product)
+    form = ProductReviewForm()
+
+    if form.validate_on_submit(): 
+        review = ProductReview(content=form.content.data, rating=form.rating.data, product_id=product.id)
+        db.session.add(review)
+        db.session.commit()
+        
+        flash('Review submitted successfully!', 'success')
+        return redirect(url_for('single_page', id=id)) 
+
+    return render_template('products/single_page.html', product=product, form=form)
 
 @app.route('/result')
 def result():    
@@ -145,6 +158,24 @@ def deletecategory(id):
         return redirect(url_for('category'))
     flash(f'Category {category.name} cant be deleted','danger')
     return redirect(url_for('category'))
+
+@app.route('/admin/productreviews', methods=['GET'])
+def product_reviews():
+    page = request.args.get('page', 1, type=int)
+    reviews = ProductReview.query.order_by(ProductReview.date_created.desc()).paginate(page=page, per_page=3)
+    return render_template('admin/product_reviews.html', reviews=reviews)
+
+
+@app.route('/productresult')
+def prod_result():    
+    searchword = request.args.get('q')
+    products_query = ProductReview.query.msearch(searchword, fields=['content', 'id'], limit=4)
+    products = products_query.all()
+    
+    if len(products) == 0:
+        flash('Item not found', 'danger')
+    return render_template('admin/productrev.html', products=products)
+
 
 @app.route('/addproduct', methods=['GET', 'POST'])
 def addproduct():

@@ -9,8 +9,16 @@
     <hr>
     {% include '_messages.html' %}
     <div class="row">
-        <div class="col-md-6" id="b_image"> 
+        <div class="col-md-6" >
+        <div id="b_image"> 
             <img src="{{url_for('static', filename='images/' + product.image_1)}}" alt="{{product.name}}" width="400" height="400">
+        </div>
+            <div class="col-md-12 mt-5" class="s_image" id="s_image">
+                <h6>See more like this!</h6>
+                <img src="{{url_for('static', filename='images/' + product.image_1)}}" alt="{{product.name}}" width="120" height="120" style="margin-right: 50px">
+                <img src="{{url_for('static', filename='images/' + product.image_2)}}" alt="{{product.name}}" width="120" height="120" style="margin-right: 50px">
+                <img src="{{url_for('static', filename='images/' + product.image_3)}}" alt="{{product.name}}" width="120" height="120" style="margin-right: 50px">
+            </div>
         </div>
         <div class="col-md-6">
             <h4 >{{product.name}}</h4>
@@ -38,17 +46,31 @@
                 <button type="submit" class="single-cart btn btn-sm btn-info">Add to Cart</button>
             </form>
            <hr>
-            <a href={{url_for('products')}} class="cancel-cart btn btn-outline-secondary mt-3" >Cancel</a>
+           <h6>Purchased this already? Give it a rating!</h6>
+           {% if current_user.is_authenticated and has_purchased_product(current_user.id, product.id) %}
+           <form method="post" class="review-form">
+               {{ form.csrf_token }}
+               <div class="form-group">
+                   <label for="rating">Give it a ⭐</label>
+                  {{ form.rating (class="form-control rate_star")}}
+               </div>
+               <div class="form-group">
+                   <label for="review_content">Write your review here:</label> <br>
+                  {{ form.content(class="form-control", size=10, rows=4) }}
+               </div>
+               <button class="btn btn-sm btn-info mt-3" type="submit">Submit Review</button>
+           </form>
+       {% else %}
+           <p class="text-danger">You must be logged in and/or have purchased the product to submit a review.</p>
+       {% endif %}
+       
+
+           
+            <hr>
+           <a href={{url_for('products')}} class="cancel-cart btn btn-outline-secondary mt-3" >Cancel</a>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12 mt-5" class="s_image" id="s_image">
-            <h6>See more like this!</h6>
-            <img src="{{url_for('static', filename='images/' + product.image_1)}}" alt="{{product.name}}" width="120" height="120" style="margin-right: 80px">
-            <img src="{{url_for('static', filename='images/' + product.image_2)}}" alt="{{product.name}}" width="120" height="120" style="margin-right: 80px">
-            <img src="{{url_for('static', filename='images/' + product.image_3)}}" alt="{{product.name}}" width="120" height="120" style="margin-right: 80px">
-        </div>
-    </div>
+ 
 </div>
 
 <script>
