@@ -155,33 +155,11 @@ def orders(invoice):
         return redirect(url_for('customerLogin'))
     return render_template('customer/order.html', invoice=invoice, grandtotal=grandtotal, customer=customer, orders=orders)
 
-# @app.route('/admin/orders')
-# @login_required
-# def admin_orders():
-#     if current_user.is_authenticated and current_user.is_admin:
-#         orders = CustomerOrder.query.all()
-#         for order in orders:
-#             total = 0
-#             for _, product in order.orders.items():
-#                 price = float(product['price'])
-#                 quantity = int(product['quantity'])
-#                 discount = float(product['discount'])
-#                 total += (price - discount) * quantity
-#             total = round(total, 2)
-#             order.total = total 
-
-#     else:
-#         return redirect(url_for('login'))
-
-#     return render_template('admin/orders.html', orders=orders)
-
-
 
 @app.route('/admin/orders')
 def admin_orders():
-    # orders = CustomerOrder.query.all()
-    orders = CustomerOrder.query.order_by(CustomerOrder.date_created.desc()).all()
-
+    page = request.args.get('page', 1, type=int)
+    orders = CustomerOrder.query.order_by(CustomerOrder.date_created.desc()).paginate(page=page, per_page=15)
     return render_template('admin/orders.html', orders=orders)
 
 @app.route('/delete_order/<int:order_id>', methods=['POST', 'DELETE'])

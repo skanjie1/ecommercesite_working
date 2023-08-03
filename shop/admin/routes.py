@@ -38,7 +38,8 @@ def dashboard():
 
 @app.route('/reviews')
 def admin_reviews():
-    reviews = Review.query.order_by(Review.pub_date.desc()).all()
+    page = request.args.get('page', 1, type=int)
+    reviews = Review.query.order_by(Review.pub_date.desc()).paginate(page=page, per_page=3)
     return render_template('admin/reviews.html', reviews=reviews)
 
 @app.route('/adminpage')
@@ -46,7 +47,8 @@ def adminpage():
     if 'email' not in session:
         flash(f'Please login first','danger')
         return redirect(url_for('login'))
-    products = Addproduct.query.all()
+    page = request.args.get('page',1, type=int)
+    products = Addproduct.query.paginate(page=page, per_page=6)
     return render_template('admin/index.html', title='Admin Page', products=products)
 
 @app.route('/brands')
@@ -54,7 +56,9 @@ def brands():
     if 'email' not in session:
         flash(f'Please login first','danger')
         return redirect(url_for('login'))
-    brands = Brand.query.order_by(Brand.id.desc()).all()
+    
+    page = request.args.get('page', 1, type=int)
+    brands = Brand.query.order_by(Brand.id.desc()).paginate(page=page, per_page=15)
     total_brands = Brand.query.count()
     return render_template('admin/brand.html', title="Brand page", brands=brands, total_brands=total_brands)
 
@@ -63,19 +67,10 @@ def category():
     if 'email' not in session:
         flash(f'Please login first','danger')
         return redirect(url_for('login'))
-    categories = Category.query.order_by(Category.id.desc()).all()
+    page = request.args.get('page', 1, type=int)
+    categories = Category.query.order_by(Category.id.desc()).paginate(page=page, per_page=15)
     total_categories = Category.query.count()
-    return render_template('admin/brand.html', title="Brand page", categories=categories, total_categories=total_categories)
-
- 
-# -------------------------
-# @app.route('/admin')
-# def admin():
-#     if 'email' not in session:
-#         flash(f'PLease login first', 'danger')
-#         return redirect(url_for('login'))
-#     products = Addproduct.query.all()
-#     return render_template('admin/index.html', title='Admin Page', products=products)
+    return render_template('admin/category.html', title="Category page", categories=categories, total_categories=total_categories)
 
 
 @app.route('/register', methods=['GET', 'POST'])

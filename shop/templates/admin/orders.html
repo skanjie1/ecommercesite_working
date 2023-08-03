@@ -46,7 +46,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for order in orders %}
+            {% for order in orders.items %}
             <tr>
                 <td>{{loop.index}}</td>
                 <td>{{ order.invoice }}</td>
@@ -58,5 +58,26 @@
             {% endfor %}
         </tbody>
     </table>
+    <div class="row">
+        <div class="col text-center">
+        {% if orders.has_prev %}
+        <a href="{{url_for('admin_orders', page=orders.prev_num)}}" class="btn btn-sm btn-outline-secondary mt-3">&laquo;</a>
+        {% endif %}
+        {% for page_num in orders.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=1) %}
+        {% if page_num %}
+        {% if orders.page == page_num %}
+        <a href="{{url_for('admin_orders', page=page_num)}}" class="btn btn-sm btn-info mt-3">{{page_num}}</a>
+        {% else %}
+        <a href="{{url_for('admin_orders', page=page_num)}}" class="btn btn-sm btn-outline-secondary mt-3">{{page_num}}</a>
+        {% endif %}
+        {% else %}
+        ...
+        {% endif %}
+        {% endfor%}
+        {% if orders.has_next %}
+        <a href="{{url_for('admin_orders', page=orders.next_num)}}" class="btn btn-sm btn-outline-secondary mt-3">&raquo;</a>
+        {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}

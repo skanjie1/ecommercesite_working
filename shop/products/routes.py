@@ -17,6 +17,7 @@ def categories():
     categories = Category.query.join(Addproduct, (Category.id == Addproduct.category_id)).all()
     return categories
 
+
 @app.route('/products')
 @login_required
 def products():
@@ -26,25 +27,6 @@ def products():
     categories = Category.query.join(Addproduct, (Category.id == Addproduct.category_id)).all()
 
     return render_template('products/index.html', products=products, brands=brands, categories=categories)
-
-# @app.route('/load_more_products', methods=['POST'])
-# def load_more_products():
-#     page = request.json.get('page', 1)
-#     per_page = 8
-#     products = Addproduct.query.filter(Addproduct.stock > 0).paginate(page=page, per_page=per_page)
-
-#     product_data = []
-#     for product in products.items:
-#         product_data.append({
-#             'id': product.id,
-#             'name': product.name,
-#             'price': product.price,
-#             'discount': product.discount,
-#             'image_1': product.image_1,
-#         })
-
-#     return jsonify({'products': product_data, 'has_next': products.has_next})
-
 
 @app.route('/product/<int:id>')
 def single_page(id):
@@ -304,5 +286,5 @@ def cat_result():
         # categories = Category.query.join(Addproduct, (Category.id == Addproduct.category_id)).all()
         # return render_template('admin/brand.html', brands=brands, categories=categories)
 
-    return render_template('admin/brandresult.html', categories=categories)
+    return render_template('admin/categoryresult.html', categories=categories)
 

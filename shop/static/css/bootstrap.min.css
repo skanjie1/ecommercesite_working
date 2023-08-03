@@ -1274,6 +1274,15 @@ color: #878787;
   .teamcard {width:100%;margin-right:0}
 }
 
+/* loadmore */
+.load-more{
+  cursor: pointer;
+  transition: .3s linear;
+}
+
+.load-more:hover{
+  opacity: 2;
+}
 
 
 

@@ -51,7 +51,7 @@
             <th>Delete</th>
         </thead>
         <tbody>
-            {% for product in products%}
+            {% for product in products.items %}
             <tr>
                 <td>{{loop.index}}</td>
                 <td>{{product.name}}</td>
@@ -93,7 +93,28 @@
             </tr>
             {% endfor %}
         </tbody>
-    </table>
+      </table>
+      <div class="row">
+        <div class="col text-center">
+        {% if products.has_prev %}
+        <a href="{{url_for('adminpage', page=products.prev_num)}}" class="btn btn-sm btn-outline-secondary mt-3">&laquo;</a>
+        {% endif %}
+        {% for page_num in products.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=1) %}
+        {% if page_num %}
+        {% if products.page == page_num %}
+        <a href="{{url_for('adminpage', page=page_num)}}" class="btn btn-sm btn-info mt-3">{{page_num}}</a>
+        {% else %}
+        <a href="{{url_for('adminpage', page=page_num)}}" class="btn btn-sm btn-outline-secondary mt-3">{{page_num}}</a>
+        {% endif %}
+        {% else %}
+        ...
+        {% endif %}
+        {% endfor%}
+        {% if products.has_next %}
+        <a href="{{url_for('adminpage', page=products.next_num)}}" class="btn btn-sm btn-outline-secondary mt-3">&raquo;</a>
+        {% endif %}
+        </div>
+    </div>
 </div>            
     
 

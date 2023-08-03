@@ -36,45 +36,45 @@
             <th>Delete</th>
         </thead>
         <tbody>
+
             <div class="container">
-                <div class="text-center h5 mt-4">Manage brands</div>
+                <div class="text-center h5 mt-4">Manage categories</div>
                 <div class="dashboard-button">
                 <a href="{{url_for('dashboard')}}", class="btn btn-sm btn-outline-secondary" style="margin-left: 0px">Back to dashboard</a>
-                <form action="{{url_for('brand_result')}}" class="form-inline my-2 my-lg-0">
-                    <input class="dashboard-search-form search-form form-control mr-sn-2" type="search" name="q" placeholder="Search Brand" aria-label="Search">
+                <form action="{{url_for('cat_result')}}" class="form-inline my-2 my-lg-0">
+                    <input class="dashboard-search-form search-form form-control mr-sn-2" type="search" name="q" placeholder="Search Categories" aria-label="Search">
                     <button class="dashboard-search-button search-button btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
             <hr>
-            {% for brand in brands.items%}
+            {% for category in categories.items%}
             <tr>
                 <td>{{loop.index}}</td>
-                <td>{{brand.name}}</td>
-                <td><a href="{{url_for('updatebrand', id=brand.id)}}", class="btn btn-sm btn-outline-info">Edit</a></td>
+                <td>{{category.name}}</td>
+                <td><a href="{{url_for('updatecategory', id=category.id)}}", class="btn btn-sm btn-outline-info">Edit</a></td>
                 <td>
-                    <!-- <a href="", class="btn btn-sm btn-outline-danger">Delete</a>-->
-                    <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-{{brand.id}}">
+                    <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-{{category.id}}">
                         Delete
                     </button>
                 </td>
             </tr>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal-{{brand.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+              <!-- Modal -->
+  <div class="modal fade" id="exampleModal-{{category.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">{{brand.name}} confirm delete</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">{{category.name}} confirm delete</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <span>
-            Are you sure you want to delete {{brand.name}}?
+            Are you sure you want to delete {{category.name}}
           </span>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-sm btn-warning" data-bs-dismiss="modal">Cancel</button>
-          <form action="{{url_for('deletebrand', id=brand.id)}}" method="POST">
+          <form action="{{url_for('deletecategory', id=category.id)}}" method="POST">
 
               <button type="submit" class="btn btn-sm btn-danger">Delete</button>
           </form>
@@ -82,32 +82,32 @@
       </div>
     </div>
   </div>
-      
   
             {% endfor %}
         </tbody>
     </table>
-    <div class="row">
-      <div class="col text-center">
-      {% if brands.has_prev %}
-      <a href="{{url_for('brands', page=brands.prev_num)}}" class="btn btn-sm btn-outline-secondary mt-3">&laquo;</a>
-      {% endif %}
-      {% for page_num in brands.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=1) %}
-      {% if page_num %}
-      {% if brands.page == page_num %}
-      <a href="{{url_for('brands', page=page_num)}}" class="btn btn-sm btn-info mt-3">{{page_num}}</a>
-      {% else %}
-      <a href="{{url_for('brands', page=page_num)}}" class="btn btn-sm btn-outline-secondary mt-3">{{page_num}}</a>
-      {% endif %}
-      {% else %}
-      ...
-      {% endif %}
-      {% endfor%}
-      {% if brands.has_next %}
-      <a href="{{url_for('brands', page=brands.next_num)}}" class="btn btn-sm btn-outline-secondary mt-3">&raquo;</a>
-      {% endif %}
-      </div>
-  </div>
+
+  <div class="row">
+    <div class="col text-center">
+    {% if categories.has_prev %}
+    <a href="{{url_for('category', page=categories.prev_num)}}" class="btn btn-sm btn-outline-secondary mt-3">&laquo;</a>
+    {% endif %}
+    {% for page_num in categories.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=1) %}
+    {% if page_num %}
+    {% if categories.page == page_num %}
+    <a href="{{url_for('category', page=page_num)}}" class="btn btn-sm btn-info mt-3">{{page_num}}</a>
+    {% else %}
+    <a href="{{url_for('category', page=page_num)}}" class="btn btn-sm btn-outline-secondary mt-3">{{page_num}}</a>
+    {% endif %}
+    {% else %}
+    ...
+    {% endif %}
+    {% endfor%}
+    {% if categories.has_next %}
+    <a href="{{url_for('category', page=categories.next_num)}}" class="btn btn-sm btn-outline-secondary mt-3">&raquo;</a>
+    {% endif %}
+    </div>
+</div>
 
 </div>            
     
