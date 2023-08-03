@@ -44,7 +44,7 @@ def thanks():
         db.session.add(review)
         db.session.commit()
         flash('Review submitted successfully!', 'success')
-        return redirect(url_for('thanks'))
+        return redirect(url_for('explore'))
 
     reviews = Review.query.order_by(Review.pub_date.desc()).all()
     

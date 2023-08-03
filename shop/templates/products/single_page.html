@@ -15,10 +15,29 @@
         </div>
             <div class="col-md-12 mt-5" class="s_image" id="s_image">
                 <h6>See more like this!</h6>
-                <img src="{{url_for('static', filename='images/' + product.image_1)}}" alt="{{product.name}}" width="120" height="120" style="margin-right: 50px">
-                <img src="{{url_for('static', filename='images/' + product.image_2)}}" alt="{{product.name}}" width="120" height="120" style="margin-right: 50px">
-                <img src="{{url_for('static', filename='images/' + product.image_3)}}" alt="{{product.name}}" width="120" height="120" style="margin-right: 50px">
+                <img src="{{url_for('static', filename='images/' + product.image_1)}}" alt="{{product.name}}" width="100" height="100" style="margin-right: 30px">
+                <img src="{{url_for('static', filename='images/' + product.image_2)}}" alt="{{product.name}}" width="100" height="100" style="margin-right: 30px">
+                <img src="{{url_for('static', filename='images/' + product.image_3)}}" alt="{{product.name}}" width="100" height="100" style="margin-right: 30px">
             </div>
+            <hr>
+            <div class=" mt-4">
+                <h5>-Product reviews-</h5>
+            </div>
+                {% for review in reviews %}
+                    <div class="card mb-3">
+                        <div class="review_card card-body">
+                            <h5 class="card-title">{{ review.rating }} ⭐</h5>
+                            {% set sentiment_score = review.content | sentiment_score %}
+                            {% if sentiment_score > 0 %}
+                                <p class="card-text">{{ review.content }}</p>
+                            {% endif %}
+                            <p class="card-text"><small class="text-muted">Helpful?{{ review.helpful_count }}</small>              
+                                <a href="#" class="btn" onclick="markHelpful({{ review.id }})"><img src="https://cdn-icons-png.flaticon.com/128/2415/2415237.png" width="15" height="15"></a>
+                                <a href="#" class="btn" onclick="markHelpful({{ review.id }})"><img src="https://cdn-icons-png.flaticon.com/128/2415/2415402.png" width="15" height="15"></a>
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
         </div>
         <div class="col-md-6">
             <h4 >{{product.name}}</h4>
@@ -47,7 +66,6 @@
             </form>
            <hr>
            <h6>Purchased this already? Give it a rating!</h6>
-           {% if current_user.is_authenticated and has_purchased_product(current_user.id, product.id) %}
            <form method="post" class="review-form">
                {{ form.csrf_token }}
                <div class="form-group">
@@ -60,9 +78,7 @@
                </div>
                <button class="btn btn-sm btn-info mt-3" type="submit">Submit Review</button>
            </form>
-       {% else %}
-           <p class="text-danger">You must be logged in and/or have purchased the product to submit a review.</p>
-       {% endif %}
+ 
        
 
            
@@ -84,5 +100,22 @@
         b_image.innerHTML = "<img src="+ ImageSRC +" width='400' height='400' >";
     }
 </script>
+<script>
+    function markHelpful(reviewId) {
+        $.ajax({
+            url: "{{ url_for('mark_helpful') }}",
+            type: "POST",
+            data: { review_id: reviewId },
+            success: function(response) {
+                const helpfulCount = response.helpful_count;
+                $(`button[onclick="markHelpful(${reviewId})"]`).prev().text(`Helpful: ${helpfulCount}`);
+            },
+            error: function(error) {
+                console.error("Error marking review as helpful:", error);
+            }
+        });
+    }
+</script>
+
 
 {% endblock content %}

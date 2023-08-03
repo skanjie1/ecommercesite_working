@@ -4,7 +4,7 @@ from shop import app, db, bcrypt
 from .forms import RegistrationForm, LoginForm
 from .models import User
 from shop.customers.model import CustomerOrder, Review
-from shop.products.models import Addproduct, Brand, Category
+from shop.products.models import Addproduct, Brand, Category, ProductReview
 import os
 
 @app.route('/')
@@ -32,9 +32,10 @@ def dashboard():
     total_categories = Category.query.count()
     total_orders = CustomerOrder.query.count()
     total_reviews = Review.query.count()
+    total_previews = ProductReview.query.count()
 
     products = Addproduct.query.all()
-    return render_template('admin/admin.html', title='Dashboard', products=products, total_items=total_items, total_brands=total_brands, total_categories=total_categories, total_orders=total_orders, total_reviews=total_reviews)
+    return render_template('admin/admin.html', title='Dashboard', products=products, total_items=total_items, total_brands=total_brands, total_categories=total_categories, total_orders=total_orders, total_reviews=total_reviews, total_previews=total_previews)
 
 @app.route('/reviews')
 def admin_reviews():

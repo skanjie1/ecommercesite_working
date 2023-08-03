@@ -22,7 +22,7 @@
     <div class="container">
     {% include '_messages.html' %}
 
-    <div class="text-center h5 mt-4">-Customer Reviews-</div>
+    <div class="text-center h5 mt-4">-Product Reviews-</div>
     <div class="dashboard-button">
     <a href="{{url_for('dashboard')}}", class="btn btn-sm btn-outline-secondary" style="margin-left: 0px">Back to dashboard</a>
     <form action="{{url_for('prod_result')}}" class="form-inline my-2 my-lg-0">
@@ -49,7 +49,7 @@
             {% else %}
                 <p class="card-text text-warning">Meh It's Ok🙂</p> 
             {% endif %}
-            <p class="card-text"><small class="text-muted">{{ review.pub_date }}</small></p>
+            <p class="card-text"><small class="text-muted">{{ review.date_created }}</small></p>
         </div>
     </div>
     {% endfor %}

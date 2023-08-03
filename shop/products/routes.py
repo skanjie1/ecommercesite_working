@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from .models import Brand, Category, Addproduct, ProductReview
 from .forms import Addproducts, ProductReviewForm
 from shop.utils import has_purchased_product
+from textblob import TextBlob
 # from shop.customers.model import CustomerOrder
 import secrets, os
 
@@ -31,6 +32,12 @@ def products():
     return render_template('products/index.html', products=products, brands=brands, categories=categories)
 
 
+@app.template_filter('sentiment_score')
+def sentiment_score(text):
+    blob = TextBlob(text)
+    return blob.sentiment.polarity
+
+
 @app.route('/product/<int:id>', methods=['GET', 'POST'])
 def single_page(id):
     product = Addproduct.query.get_or_404(id)
@@ -43,8 +50,22 @@ def single_page(id):
         
         flash('Review submitted successfully!', 'success')
         return redirect(url_for('single_page', id=id)) 
+    
+    
+    # reviews = ProductReview.query.order_by(product_id=id.desc()).limit(5).all
+    reviews = ProductReview.query.filter_by(product_id=product.id).order_by(ProductReview.date_created.desc()).limit(3).all()
+    positive_reviews = [review for review in reviews if sentiment_score(review.content) > 0]
+    return render_template('products/single_page.html', product=product, form=form, reviews=positive_reviews)
 
-    return render_template('products/single_page.html', product=product, form=form)
+@app.route('/mark_helpful', methods=['POST'])
+def mark_helpful():
+    review_id = request.form.get('review_id')
+    review = ProductReview.query.get(review_id)
+    if review:
+        review.helpful_count += 1
+        db.session.commit()
+        return jsonify({"helpful_count": review.helpful_count})
+    return jsonify({"error": "Review not found"}), 404
 
 @app.route('/result')
 def result():    
