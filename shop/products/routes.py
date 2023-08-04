@@ -20,12 +20,12 @@ def categories():
     categories = Category.query.join(Addproduct, (Category.id == Addproduct.category_id)).all()
     return categories
 
-
 @app.route('/products')
 @login_required
 def products():
-    page = request.args.get('page',1, type=int)
-    products = Addproduct.query.filter(Addproduct.stock > 0).paginate(page=page, per_page=8)  
+    # page = request.args.get('page',1, type=int)
+    # products = Addproduct.query.filter(Addproduct.stock > 0).paginate(page=page, per_page=8)  
+    products = Addproduct.query.filter(Addproduct.stock > 0).all()  
     brands = Brand.query.join(Addproduct, (Brand.id == Addproduct.brand_id)).all()
     categories = Category.query.join(Addproduct, (Category.id == Addproduct.category_id)).all()
 
@@ -54,8 +54,8 @@ def single_page(id):
     
     # reviews = ProductReview.query.order_by(product_id=id.desc()).limit(5).all
     reviews = ProductReview.query.filter_by(product_id=product.id).order_by(ProductReview.date_created.desc()).limit(3).all()
-    positive_reviews = [review for review in reviews if sentiment_score(review.content) > 0]
-    return render_template('products/single_page.html', product=product, form=form, reviews=positive_reviews)
+    # positive_reviews = [review for review in reviews if sentiment_score(review.content) > 0]
+    return render_template('products/single_page.html', product=product, form=form, reviews=reviews)
 
 @app.route('/mark_helpful', methods=['POST'])
 def mark_helpful():

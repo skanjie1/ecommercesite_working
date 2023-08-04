@@ -35,6 +35,8 @@ class Addproduct(db.Model):
     #create function to return a string
     def __repr__(self):
         return '<Addproduct %r>' % self.name
+    
+    
 
 class ProductReview(db.Model):
     __searchbale__ = ['content']

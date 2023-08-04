@@ -27,10 +27,7 @@
                     <div class="card mb-3">
                         <div class="review_card card-body">
                             <h5 class="card-title">{{ review.rating }} ⭐</h5>
-                            {% set sentiment_score = review.content | sentiment_score %}
-                            {% if sentiment_score > 0 %}
-                                <p class="card-text">{{ review.content }}</p>
-                            {% endif %}
+                            <p class="card-text">{{ review.content }}</p>
                             <p class="card-text"><small class="text-muted">Helpful?{{ review.helpful_count }}</small>              
                                 <a href="#" class="btn" onclick="markHelpful({{ review.id }})"><img src="https://cdn-icons-png.flaticon.com/128/2415/2415237.png" width="15" height="15"></a>
                                 <a href="#" class="btn" onclick="markHelpful({{ review.id }})"><img src="https://cdn-icons-png.flaticon.com/128/2415/2415402.png" width="15" height="15"></a>
