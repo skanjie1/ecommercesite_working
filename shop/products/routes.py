@@ -190,12 +190,13 @@ def product_reviews():
 @app.route('/productresult')
 def prod_result():    
     searchword = request.args.get('q')
-    products_query = ProductReview.query.msearch(searchword, fields=['content', 'id'], limit=4)
-    products = products_query.all()
+    prodrev_query = ProductReview.query.msearch(searchword, fields=['content'], limit=4)
+    prodrev = prodrev_query.all()
+    print(prodrev)
     
-    if len(products) == 0:
+    if len(prodrev) == 0:
         flash('Item not found', 'danger')
-    return render_template('admin/productrev.html', products=products)
+    return render_template('admin/productrev.html', prodrev=prodrev)
 
 
 @app.route('/addproduct', methods=['GET', 'POST'])

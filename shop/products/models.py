@@ -37,7 +37,7 @@ class Addproduct(db.Model):
         return '<Addproduct %r>' % self.name
 
 class ProductReview(db.Model):
-    __searchbale__ = ['content', 'id']
+    __searchbale__ = ['content']
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
     rating = db.Column(db.Integer)
