@@ -6,6 +6,8 @@ from flask_msearch import Search
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from textblob import TextBlob
+from shop.admin.admin_resources import AdminRegistrationResource, AdminLoginResource
+
 # from shop.utils import has_purchased_product
 # from shop import db
 import os
@@ -28,6 +30,14 @@ db.init_app(app)
 bcrypt = Bcrypt(app)
 search = Search()
 search.init_app(app)
+
+jwt = JWTManager(app)
+api = Api(app)
+
+
+api.add_resource(AdminRegistrationResource, '/api/admin/register')
+api.add_resource(AdminLoginResource, '/api/admin/login')
+
 
 migrate = Migrate(app, db)
 

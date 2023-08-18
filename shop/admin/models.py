@@ -1,4 +1,4 @@
-from shop import db, app
+from shop import db
 
 
 class User(db.Model):
@@ -12,6 +12,3 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.username
     
-
-with app.app_context():
-    db.create_all()
